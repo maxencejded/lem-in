@@ -1,23 +1,11 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: mjacques <marvin@42.fr>                    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/12/02 13:47:15 by mjacques          #+#    #+#              #
-#    Updated: 2018/12/02 13:47:18 by mjacques         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 CC			= gcc
-RM			= rm
+RM			= rm -f
 NAME		= lem-in
 CFLAGS		= -Wall -Wextra -Werror
 LIBFT 		= libft/libft.a
 INCLUDES	= -I includes\
 			  -I libft/includes
-FUNCTIONS	=
+FUNCTIONS	= main.c
 
 FILES		= $(addprefix srcs/, $(FUNCTIONS))
 OBJECTS		= $(FILES:.c=.o)
