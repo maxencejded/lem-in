@@ -1,5 +1,36 @@
 #include "lem-in.h"
 
+#define MIN(x, y) ((x) < (y)) ? (x) : (y)
+
+typedef struct			s_edge
+{
+	struct s_node		*node;
+	int					flow_in;
+	int					flow_out;
+	int					flow_max;
+	struct s_edge		*next;
+}						t_edge;
+
+typedef struct			s_node
+{
+	char				*name;
+	unsigned int		height;
+	int					excess;
+	unsigned int		visited;
+	enum e_flag{
+		SOURCE, SINK, REGULAR
+	}					e_flag;
+	t_edge				*edges;
+}						t_node;
+
+// typedef struct			s_hashtable
+// {
+// 	int					key;
+// 	void				*data;
+// 	struct s_hashtable	*next;
+// }						t_hashtable;
+
+
 t_node		*create_node(char *name)
 {
 	t_node	*new;
