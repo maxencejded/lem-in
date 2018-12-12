@@ -1,7 +1,7 @@
 CC			= gcc
 RM			= rm -f
 NAME		= lem-in
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -g
 LIBFT 		= libft/libft.a
 INCLUDES	= -I includes\
 			  -I libft/includes
