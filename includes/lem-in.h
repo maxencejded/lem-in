@@ -13,6 +13,10 @@ typedef struct			s_node
 	enum e_visited{
 		TRUE, FALSE
 	}					visited;
+	unsigned int		height;
+	enum e_flag{
+		SOURCE, SINK, REGULAR
+	}					flag;
 	t_edge				*edges;
 }						t_node;
 
