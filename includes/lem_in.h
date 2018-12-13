@@ -35,7 +35,7 @@ typedef struct		s_node
 
 typedef struct		s_path
 {
-	t_node			*nodes;
+	t_node			**nodes;
 	UINT			len;
 }					t_path;
 
