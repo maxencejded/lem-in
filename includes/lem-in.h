@@ -1,6 +1,7 @@
 #ifndef LEM_IN_H
 # define LEM_IN_H
 # include "libft.h"
+# include "queue.h"
 
 typedef struct			s_edge
 {
@@ -23,7 +24,7 @@ typedef struct			s_node
 
 typedef struct			s_path
 {
-	t_node				*nodes;
+	t_node				**nodes;
 	unsigned int		len;
 }						t_path;
 
