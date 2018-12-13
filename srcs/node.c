@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 00:06:12 by mjacques          #+#    #+#             */
-/*   Updated: 2018/12/13 13:59:12 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/12/13 14:07:41 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ t_node		*node_insert(char *str, t_flag flag, t_hash **map, t_node **start)
 		exit_lem_in(map);
 	if (split[1] == NULL)
 	{
+		ft_strdel(&str);
 		ft_ptrdel(split);
 		return (NULL);
 	}

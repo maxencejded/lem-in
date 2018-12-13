@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 00:06:16 by mjacques          #+#    #+#             */
-/*   Updated: 2018/12/13 13:59:04 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/12/13 14:07:53 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,5 @@ t_node			*parse(int fd, t_hash **map)
 		}
 		flag = flag_update(line);
 	}
-	ft_strdel(&line);
 	return (start);
 }
