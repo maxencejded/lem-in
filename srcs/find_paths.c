@@ -9,7 +9,6 @@ static t_node		*get_neighbor_with_min_height(t_node *node)
 
 	neighbor_with_min_h = NULL;
 	min_h = UINT_MAX;
-
 	edge = node->edges;
 	while (edge)
 	{
@@ -46,7 +45,6 @@ t_paths				*create_paths(t_path *path)
 
 static void			add_path(t_paths **tail, t_node *end)
 {
-	/* trace back and take minimum height, make nodes as in use*/
 	t_node	*node;
 	t_path	*path;
 
@@ -63,7 +61,6 @@ static void			add_path(t_paths **tail, t_node *end)
 	}
 	if ((*tail = create_paths(path)) == NULL)
 		ft_error("not enough memory");
-	*tail = (*tail)->next;
 }
 
 static void			process_edges(t_node *node, t_queue **queue, unsigned int height)
@@ -99,6 +96,7 @@ t_paths				*find_shortest_paths(t_node *graph, unsigned int n_ants)
 			add_path(&tail, node);
 			if (head == NULL)
 				head = tail;
+			tail = tail->next;
 			if (node->height >= n_ants)
 				break;
 		}
