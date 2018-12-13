@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 00:06:14 by mjacques          #+#    #+#             */
-/*   Updated: 2018/12/13 01:07:47 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/12/13 13:16:10 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,12 @@ static t_edge	*edge_create(t_node *element)
 
 static void		edge_insert(t_node *element, t_edge *link)
 {
-	t_edge	*tmp;
-
 	if (!element->edges)
 		element->edges = link;
 	else
 	{
-		tmp = element->edges;
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = link;
+		link->next = element->edges;
+		element->edges = link;
 	}
 }
 
