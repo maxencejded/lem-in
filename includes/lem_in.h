@@ -69,4 +69,9 @@ t_node				*node_insert(char *str, t_flag flag, t_hash **map,
 void				node_edge(t_node *elem_1, t_node *elem_2, t_hash **map);
 void				node_link(char *str, t_hash **map, int position);
 
+t_path				*create_path(size_t size);
+t_paths				*create_paths(t_path *path);
+void				print_paths(t_paths *paths);
+void				print_path(t_path *path);
+
 #endif
