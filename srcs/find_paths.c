@@ -1,33 +1,6 @@
 #include <lem_in.h>
 #include <queue.h>
 #include <limits.h>
-#include <printf.h>
-#include <ft_printf.h>
-
-void				print_path(t_path *path)
-{
-	size_t i;
-
-	i = 0;
-	while (i < path->len)
-	{
-		ft_printf("%s -> ", path->nodes[i]->name);
-		i++;
-	}
-	ft_printf(" [%d]\n", path->len);
-}
-
-void				print_paths(t_paths *paths)
-{
-	t_paths *cur;
-
-	cur = paths;
-	while (cur)
-	{
-		print_path(cur->path);
-		cur = cur->next;
-	}
-}
 
 static t_node		*get_neighbor_with_min_height(t_node *node)
 {
@@ -40,7 +13,8 @@ static t_node		*get_neighbor_with_min_height(t_node *node)
 	edge = node->edges;
 	while (edge)
 	{
-		if (edge->node->flag != SINK && edge->node->height < min_h && edge->node->visited == FALSE)
+		if (edge->node->flag != SINK && edge->node->height < min_h
+			&& edge->node->visited == FALSE)
 		{
 			min_h = edge->node->height;
 			neighbor_with_min_h = edge->node;
@@ -48,29 +22,6 @@ static t_node		*get_neighbor_with_min_height(t_node *node)
 		edge = edge->next;
 	}
 	return (neighbor_with_min_h);
-}
-
-static t_path		*create_path(size_t size)
-{
-	t_path	*path;
-
-	if ((path = (t_path*)malloc(sizeof(t_path))) == NULL)
-		ft_error("not enough memory");
-	if ((path->nodes = (t_node**)malloc(sizeof(t_node*) * size)) == NULL)
-		ft_error("not enough memory");
-	path->len = (UINT)size;
-	return (path);
-}
-
-t_paths				*create_paths(t_path *path)
-{
-	t_paths *p;
-
-	if ((p = (t_paths*)malloc(sizeof(t_paths))) == NULL)
-		return (NULL);
-	p->path = path;
-	p->next = NULL;
-	return (p);
 }
 
 static t_path		*set_path(t_node *sink)
@@ -89,7 +40,7 @@ static t_path		*set_path(t_node *sink)
 	{
 		path->nodes[node->height] = node;
 		if (node->flag == SOURCE)
-			break;
+			break ;
 		node->visited = TRUE;
 		node = get_neighbor_with_min_height(node);
 	}
@@ -110,14 +61,16 @@ static void			add_path(t_paths **tail, t_node *end)
 		*tail = next;
 }
 
-static void			process_edges(t_node *node, t_queue **queue, unsigned int height)
+static void			process_edges(t_node *node,
+	t_queue **queue, unsigned int height)
 {
 	t_edge			*edge;
 
 	edge = node->edges;
 	while (edge)
 	{
-		if ((edge->node->height == 0 && edge->node->flag != SOURCE) || edge->node->flag == SINK)
+		if ((edge->node->height == 0 && edge->node->flag != SOURCE)
+			|| edge->node->flag == SINK)
 		{
 			edge->node->height = height;
 			queue_add(queue, edge->node);
@@ -145,7 +98,7 @@ t_paths				*find_shortest_paths(t_node *graph, unsigned int n_ants)
 			if (head == NULL)
 				head = tail;
 			if (node->height >= n_ants)
-				break;
+				break ;
 		}
 		else
 			process_edges(node, &queue, node->height + 1);
