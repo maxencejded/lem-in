@@ -1,4 +1,4 @@
-#include "lem-in.h"
+#include "lem_in.h"
 
 #define MIN(x, y) ((x) < (y)) ? (x) : (y)
 
@@ -14,12 +14,12 @@ typedef struct			s_edge
 typedef struct			s_node
 {
 	char				*name;
-	unsigned int		height;
+	UINT		height;
 	int					excess;
-	unsigned int		visited;
-	enum e_flag{
+	UINT		visited;
+	enum t_flag{
 		SOURCE, SINK, REGULAR
-	}					e_flag;
+	}					t_flag;
 	t_edge				*edges;
 }						t_node;
 
@@ -40,13 +40,13 @@ t_node		*create_node(char *name)
 	new->name = ft_strdup(name);
 	new->height = 0;
 	new->excess = 0;
-	new->e_flag = REGULAR;
+	new->t_flag = REGULAR;
 	new->edges = NULL;
 	return (new);
 }
 
 
-void	recursive_get_node_with_excess(t_node *node, unsigned int *max_h, t_node **node_max_h, unsigned int visited_token)
+void	recursive_get_node_with_excess(t_node *node, UINT *max_h, t_node **node_max_h, UINT visited_token)
 {
 	t_edge	*edge;
 
@@ -69,8 +69,8 @@ void	recursive_get_node_with_excess(t_node *node, unsigned int *max_h, t_node **
 
 t_node		*get_node_with_excess(t_node *graph)
 {
-	unsigned int		max_h;
-	static unsigned int	visited_token = 0;
+	UINT		max_h;
+	static UINT	visited_token = 0;
 	t_node	*node_max_h;
 
 	node_max_h = NULL;
@@ -160,11 +160,11 @@ int		main(int argc, char **argv)
 		ft_error("Usage: ./lem-in");
 	// Find the numbers of nodes to add to the S
 	t_node	*node_4 = create_node("Node_4");
-	node_4->e_flag = SINK;
+	node_4->t_flag = SINK;
 	t_node	*node_3 = create_node("Node_3");
 	t_node	*node_2 = create_node("Node_2");
 	t_node	*node_1 = create_node("Node_1");
-	node_4->e_flag = SOURCE;
+	node_4->t_flag = SOURCE;
 	node_3->edges = create_edge(node_4);
 	node_2->edges = create_edge(node_3);
 	node_2->edges->next = create_edge(node_4);

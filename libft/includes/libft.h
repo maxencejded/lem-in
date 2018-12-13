@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 11:39:42 by mjacques          #+#    #+#             */
-/*   Updated: 2018/10/28 20:55:48 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/12/12 21:04:17 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,4 +106,7 @@ uint32_t			swap_int32(uint32_t x);
 uint64_t			swap_int64(uint64_t x);
 
 void				ft_error(char *str);
+
+char				**ft_splitspace(char *str);
+void				ft_ptrdel(char **ptr);
 #endif

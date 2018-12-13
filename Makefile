@@ -5,7 +5,9 @@ CFLAGS		= -Wall -Wextra -Werror -g
 LIBFT 		= libft/libft.a
 INCLUDES	= -I includes\
 			  -I libft/includes
-FUNCTIONS	= main.c
+FUNCTIONS	= main.c parse.c error.c\
+				hash_map.c hash_map_elem.c\
+				node.c edges.c
 
 FILES		= $(addprefix srcs/, $(FUNCTIONS))
 OBJECTS		= $(FILES:.c=.o)
