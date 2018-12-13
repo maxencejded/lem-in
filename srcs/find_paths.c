@@ -97,7 +97,7 @@ t_paths				*find_shortest_paths(t_node *graph, unsigned int n_ants)
 			add_path(&tail, node);
 			if (head == NULL)
 				head = tail;
-			if (node->height >= n_ants)
+			if (tail->path->len >= n_ants)
 				break ;
 		}
 		else
