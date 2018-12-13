@@ -6,6 +6,7 @@
 
 # define HASH_MAP_SIZE 256
 # define COMMENT_CHAR '#'
+# define ANT_CHAR 'L'
 # define UINT unsigned int
 
 typedef struct		s_edge
@@ -63,7 +64,8 @@ t_node				*node_create(char *name);
 void				node_free(t_node *node);
 void				node_print(t_node *node);
 
-t_node				*node_insert(char *str, t_flag flag, t_hash **map);
+t_node				*node_insert(char *str, t_flag flag, t_hash **map,
+						t_node **start);
 void				node_edge(t_node *elem_1, t_node *elem_2);
 void				node_link(char *str, t_hash **map, int position);
 

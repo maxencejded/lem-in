@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 00:06:12 by mjacques          #+#    #+#             */
-/*   Updated: 2018/12/13 01:27:22 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/12/13 13:59:12 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void		node_free(t_node *node)
 	free(node);
 }
 
-t_node		*node_insert(char *str, t_flag flag, t_hash **map)
+t_node		*node_insert(char *str, t_flag flag, t_hash **map, t_node **start)
 {
 	char	**split;
 	t_node	*node;
@@ -52,12 +52,14 @@ t_node		*node_insert(char *str, t_flag flag, t_hash **map)
 	if (split[1] == NULL)
 	{
 		ft_ptrdel(split);
-		exit_lem_in(map);
+		return (NULL);
 	}
 	node = node_create(split[0]);
 	ft_ptrdel(split);
 	node->flag = flag;
 	elem_insert(map, HASH_MAP_SIZE, node->name, node);
+	if (flag == SOURCE)
+		*start = node;
 	return (node);
 }
 
