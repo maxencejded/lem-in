@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 00:06:12 by mjacques          #+#    #+#             */
-/*   Updated: 2018/12/13 14:07:41 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/12/13 14:45:23 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,24 @@ void		node_free(t_node *node)
 	free(node);
 }
 
+static int	ptrlen(char **ptr)
+{
+	int i;
+
+	i = 0;
+	while (ptr[i])
+		i++;
+	return (i);
+}
+
 t_node		*node_insert(char *str, t_flag flag, t_hash **map, t_node **start)
 {
 	char	**split;
 	t_node	*node;
 
 	if (!(split = ft_splitspace(str)))
-		exit_lem_in(map);
-	if (split[1] == NULL)
+		exit_lem_in("Not enough Memory", map);
+	if (ptrlen(split) != 3)
 	{
 		ft_strdel(&str);
 		ft_ptrdel(split);
@@ -78,6 +88,9 @@ void		node_link(char *str, t_hash **map, int position)
 	ft_strdel(&node_1);
 	ft_strdel(&node_2);
 	if (!elem_1 || !elem_2)
-		exit_lem_in(map);
-	node_edge(elem_1, elem_2);
+	{
+		ft_strdel(&str);
+		exit_lem_in("ERROR", map);
+	}
+	node_edge(elem_1, elem_2, map);
 }

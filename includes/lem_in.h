@@ -49,7 +49,7 @@ typedef struct		s_paths
 t_paths				*find_shortest_paths(t_node *graph, UINT n_ants);
 int					execute(t_paths *paths, UINT n_ants);
 
-int					exit_lem_in(t_hash **map);
+int					exit_lem_in(char *str, t_hash **map);
 void				free_map(t_hash **map, size_t size);
 
 void				h_map_print(t_hash **map, size_t size);
@@ -66,7 +66,7 @@ void				node_print(t_node *node);
 
 t_node				*node_insert(char *str, t_flag flag, t_hash **map,
 						t_node **start);
-void				node_edge(t_node *elem_1, t_node *elem_2);
+void				node_edge(t_node *elem_1, t_node *elem_2, t_hash **map);
 void				node_link(char *str, t_hash **map, int position);
 
 #endif
