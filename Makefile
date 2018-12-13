@@ -1,13 +1,14 @@
 CC			= gcc
 RM			= rm -f
 NAME		= lem-in
-CFLAGS		= -Wall -Wextra -Werror -g
+CFLAGS		= -Wall -Wextra -Werror -g -fsanitize=address
 LIBFT 		= libft/libft.a
 INCLUDES	= -I includes\
 			  -I libft/includes
 FUNCTIONS	= main.c parse.c error.c\
 				hash_map.c hash_map_elem.c\
-				node.c edges.c
+				node.c edges.c\
+				$(addprefix queue/, queue_new.c queue_free.c queue_add.c queue_pop.c) find_paths.c
 
 FILES		= $(addprefix srcs/, $(FUNCTIONS))
 OBJECTS		= $(FILES:.c=.o)
