@@ -1,5 +1,7 @@
-#include "lem-in.h"
+#include <lem_in.h>
+#include <queue.h>
 #include <limits.h>
+#include <printf.h>
 
 static t_node		*get_neighbor_with_min_height(t_node *node)
 {
@@ -12,11 +14,12 @@ static t_node		*get_neighbor_with_min_height(t_node *node)
 	edge = node->edges;
 	while (edge)
 	{
-		if (edge->node->height < min_h)
+		if (edge->node->height < min_h && edge->node->visited == FALSE)
 		{
 			min_h = edge->node->height;
 			neighbor_with_min_h = edge->node;
 		}
+		edge = edge->next;
 	}
 	return (neighbor_with_min_h);
 }
@@ -29,6 +32,7 @@ static t_path		*create_path(size_t size)
 		ft_error("not enough memory");
 	if ((path->nodes = (t_node**)malloc(sizeof(t_node*) * size)) == NULL)
 		ft_error("not enough memory");
+	path->len = (UINT)size;
 	return (path);
 }
 
@@ -56,7 +60,7 @@ static void			add_path(t_paths **tail, t_node *end)
 		path->nodes[node->height] = node;
 		if (node->flag == SOURCE)
 			break;
-		// node->visited = TRUE;
+		node->visited = TRUE;
 		node = get_neighbor_with_min_height(node);
 	}
 	if ((*tail = create_paths(path)) == NULL)
@@ -70,12 +74,34 @@ static void			process_edges(t_node *node, t_queue **queue, unsigned int height)
 	edge = node->edges;
 	while (edge)
 	{
-		if (edge->node->height == 0) /* we've never seen this node */ // Make sure no loops to start
+		if (edge->node->height == 0 && edge->node->flag != SOURCE) /* we've never seen this node */ // Make sure no loops to start
 		{
 			edge->node->height = height;
 			queue_add(queue, edge->node);
 		}
 		edge = edge->next;
+	}
+}
+
+void				print_path(t_path *path)
+{
+	size_t i;
+
+	i = 0;
+	while (i < path->len)
+		printf("%s -> ", path->nodes[i++]->name);
+	printf(" [%d]\n", path->len);
+}
+
+void				print_paths(t_paths *paths)
+{
+	t_paths *cur;
+
+	cur = paths;
+	while (cur)
+	{
+		print_path(cur->path);
+		cur = cur->next;
 	}
 }
 
@@ -103,5 +129,6 @@ t_paths				*find_shortest_paths(t_node *graph, unsigned int n_ants)
 		else
 			process_edges(node, &queue, node->height + 1);
 	}
+	print_paths(head);
 	return (head);
 }
