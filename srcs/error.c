@@ -6,16 +6,16 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 00:08:00 by mjacques          #+#    #+#             */
-/*   Updated: 2018/12/13 01:34:00 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/12/13 14:35:03 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int			exit_lem_in(t_hash **map)
+int			exit_lem_in(char *str, t_hash **map)
 {
 	free_map(map, HASH_MAP_SIZE);
-	ft_putendl("ERROR");
+	ft_putendl(str);
 	exit(-1);
 }
 
