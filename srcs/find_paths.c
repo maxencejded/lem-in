@@ -2,6 +2,7 @@
 #include <queue.h>
 #include <limits.h>
 #include <printf.h>
+#include <ft_printf.h>
 
 void				print_path(t_path *path)
 {
@@ -9,8 +10,11 @@ void				print_path(t_path *path)
 
 	i = 0;
 	while (i < path->len)
-		printf("%s -> ", path->nodes[i++]->name);
-	printf(" [%d]\n", path->len);
+	{
+		ft_printf("%s -> ", path->nodes[i]->name);
+		i++;
+	}
+	ft_printf(" [%d]\n", path->len);
 }
 
 void				print_paths(t_paths *paths)
@@ -36,7 +40,7 @@ static t_node		*get_neighbor_with_min_height(t_node *node)
 	edge = node->edges;
 	while (edge)
 	{
-		if (edge->node->height < min_h && edge->node->visited == FALSE)
+		if (edge->node->flag != SINK && edge->node->height < min_h && edge->node->visited == FALSE)
 		{
 			min_h = edge->node->height;
 			neighbor_with_min_h = edge->node;
@@ -71,12 +75,16 @@ t_paths				*create_paths(t_path *path)
 
 static t_path		*set_path(t_node *sink)
 {
+	UINT	len;
 	t_node	*node;
 	t_path	*path;
 
-	if ((path = create_path(sink->height + 1)) == NULL)
+	if ((node = get_neighbor_with_min_height(sink)) == NULL)
+		ft_error("no neighbor");
+	len = node->height + 1;
+	if ((path = create_path(len + 1)) == NULL)
 		ft_error("not enough memory");
-	node = sink;
+	path->nodes[len] = sink;
 	while (node)
 	{
 		path->nodes[node->height] = node;
@@ -109,7 +117,7 @@ static void			process_edges(t_node *node, t_queue **queue, unsigned int height)
 	edge = node->edges;
 	while (edge)
 	{
-		if ((edge->node->height == 0 && edge->node->flag != SOURCE) || edge->node->flag == SINK) /* we've never seen this node */ // Make sure no loops to start
+		if ((edge->node->height == 0 && edge->node->flag != SOURCE) || edge->node->flag == SINK)
 		{
 			edge->node->height = height;
 			queue_add(queue, edge->node);
@@ -143,5 +151,6 @@ t_paths				*find_shortest_paths(t_node *graph, unsigned int n_ants)
 			process_edges(node, &queue, node->height + 1);
 	}
 	print_paths(head);
+	queue_free(queue, NULL);
 	return (head);
 }
