@@ -44,7 +44,7 @@ t_paths				*create_paths(t_path *path)
 	return (p);
 }
 
-static void			add_path(t_paths **paths, t_node *end)
+static void			add_path(t_paths **tail, t_node *end)
 {
 	/* trace back and take minimum height, make nodes as in use*/
 	t_node	*node;
@@ -61,9 +61,9 @@ static void			add_path(t_paths **paths, t_node *end)
 		// node->visited = TRUE;
 		node = get_neighbor_with_min_height(node);
 	}
-	if ((*paths = create_paths(path)) == NULL)
+	if ((*tail = create_paths(path)) == NULL)
 		ft_error("not enough memory");
-	*paths = (*paths)->next;
+	*tail = (*tail)->next;
 }
 
 static void			process_edges(t_node *node, t_queue **queue, unsigned int height)
@@ -86,22 +86,24 @@ t_paths				*find_shortest_paths(t_node *graph, unsigned int n_ants)
 {
 	t_queue			*queue;
 	t_node			*node;
-	t_paths			*paths;
-	t_paths			*cur_path;
+	t_paths			*head;
+	t_paths			*tail;
 
 	queue_add(&queue, graph);
-	paths = NULL;
-	cur_path = paths;
+	head = NULL;
+	tail = head;
 	while ((node = (t_node*)queue_pop(queue)))
 	{
 		if (node->flag == SINK)
 		{
-			add_path(&cur_path, node);
+			add_path(&tail, node);
+			if (head == NULL)
+				head = tail;
 			if (node->height >= n_ants)
 				break;
 		}
 		else
 			process_edges(node, &queue, node->height + 1);
 	}
-	return (paths);
+	return (head);
 }
