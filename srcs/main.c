@@ -11,16 +11,18 @@ int		main(int argc, char **argv)
 	map = NULL;
 	if (argc != 1 && argv[0])
 		ft_error("Usage: ./lem-in");
-	if ((n_ants = ants_nbr(0)) == 0)
+	int fd = open("lem_in_tests/maps/toile", O_RDONLY);
+	if ((n_ants = ants_nbr(fd)) == 0)
 		exit_lem_in("Not enough Ants", map);
 	if ((map = h_map_create(HASH_MAP_SIZE)) == NULL)
 		exit_lem_in("ERROR", map);
-	if((graph = parse(0, map)) == NULL)
+	if((graph = parse(fd, map)) == NULL)
 		exit_lem_in("ERROR", map);
 	if ((paths = find_shortest_paths(graph, n_ants)) == NULL)
 		exit_lem_in("ERROR", map);
 	ft_printf("Ants: %d\n", n_ants);
 	h_map_print(map, HASH_MAP_SIZE);
+	print_paths(paths);
 	execute(paths, n_ants);
 	paths_free(paths);
 	free_map(map, HASH_MAP_SIZE);

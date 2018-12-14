@@ -52,10 +52,10 @@ t_path			*set_path(t_node *sink)
 	if ((path = init_path(sink, &node)) == NULL)
 		return (NULL);
 	len = path->len - 2;
-	while (node && len)
+	while (node)
 	{
 		path->nodes[len] = node;
-		if (node->flag == SOURCE)
+		if (node->flag == SOURCE || len == 0)
 			break ;
 		len--;
 		node->visited = TRUE;

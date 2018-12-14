@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 21:41:44 by tkobb             #+#    #+#             */
-/*   Updated: 2018/12/13 21:41:45 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/12/13 22:23:36 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void				print_path(t_path *path)
 	i = 0;
 	while (i < path->len)
 	{
-		ft_printf("%zu \n", i);
 		ft_printf("%s -> ", path->nodes[i]->name);
 		i++;
 	}
