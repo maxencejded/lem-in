@@ -31,7 +31,7 @@ typedef struct		s_node
 {
 	char			*name;
 	UINT			used;
-	UINT			height;
+	struct s_node	*parent;
 	t_flag			flag;
 	t_visited		visited;
 	t_edge			*edges;
