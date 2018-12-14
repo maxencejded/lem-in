@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 00:06:14 by mjacques          #+#    #+#             */
-/*   Updated: 2018/12/13 17:15:27 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/12/13 20:39:45 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void			set_edge_visited(t_node *a, t_node *b)
 	while (cur)
 	{
 		if (cur->node == b)
-			break;
+			break ;
 		cur = cur->next;
 	}
 	if (cur)
