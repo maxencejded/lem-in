@@ -11,12 +11,11 @@ int		main(int argc, char **argv)
 	map = NULL;
 	if (argc != 1 && argv[0])
 		ft_error("Usage: ./lem-in");
-	int fd = open("lem_in_tests/maps/toile", O_RDONLY);
-	if ((n_ants = ants_nbr(fd)) == 0)
+	if ((n_ants = ants_nbr(0)) == 0)
 		exit_lem_in("Not enough Ants", map);
 	if ((map = h_map_create(HASH_MAP_SIZE)) == NULL)
 		exit_lem_in("ERROR", map);
-	if((graph = parse(fd, map)) == NULL)
+	if((graph = parse(0, map)) == NULL)
 		exit_lem_in("ERROR", map);
 	if ((paths = find_shortest_paths(graph, n_ants)) == NULL)
 		exit_lem_in("ERROR", map);
