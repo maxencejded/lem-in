@@ -1,5 +1,6 @@
 #include "lem_in.h"
 
+#include <stdlib.h>
 int		main(int argc, char **argv)
 {
 	t_hash			**map;
@@ -19,6 +20,7 @@ int		main(int argc, char **argv)
 	if ((paths = find_shortest_paths(graph, n_ants)) == NULL)
 		exit_lem_in("ERROR", map);
 	execute(paths, n_ants);
+	paths_free(paths);
 	free_map(map, HASH_MAP_SIZE);
 	return (0);
 }

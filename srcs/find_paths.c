@@ -58,7 +58,6 @@ t_paths				*find_shortest_paths(t_node *graph, unsigned int n_ants)
 		else
 			process_edges(node, &queue, node->height + 1);
 	}
-	// print_paths(head);
 	queue_free(queue);
 	return (head);
 }
