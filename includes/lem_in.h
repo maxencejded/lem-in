@@ -6,7 +6,6 @@
 
 # define HASH_MAP_SIZE 256
 # define COMMENT_CHAR '#'
-# define ANT_CHAR 'L'
 # define UINT unsigned int
 
 typedef enum		e_visited

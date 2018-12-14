@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 00:06:16 by mjacques          #+#    #+#             */
-/*   Updated: 2018/12/13 17:10:07 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/12/13 20:56:59 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static t_flag	flag_update(char *str, UINT *in_out)
 			in_out[1] += 1;
 		}
 	}
-	free(str);
+	ft_strdel(&str);
 	return (flag);
 }
 
@@ -61,14 +61,14 @@ t_node			*parse(int fd, t_hash **map)
 	ft_bzero(in_out, sizeof(UINT) * 2);
 	start = NULL;
 	flag = REGULAR;
-	while ((get_next_line(fd, &line) > 0) && *line)
+	while ((get_next_line(fd, &line) > 0) && line)
 	{
 		ret = ft_strchr(line, '-');
-		if (line[0] != COMMENT_CHAR && line[0] != ANT_CHAR)
+		if (line[0] != COMMENT_CHAR)
 		{
 			if (!ret)
 			{
-				if (!(node_insert(line, flag, map, &start)))
+				if (line[0] == 'L' || !(node_insert(line, flag, map, &start)))
 					break ;
 			}
 			else
