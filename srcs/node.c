@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   node.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 00:06:12 by mjacques          #+#    #+#             */
-/*   Updated: 2018/12/13 14:45:23 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/12/13 18:24:19 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_node		*node_create(char *name)
 	if (!(new = (t_node *)malloc(sizeof(t_node))))
 		return (NULL);
 	new->name = ft_strdup(name);
+	new->used = 0;
 	new->visited = FALSE;
 	new->height = 0;
 	new->flag = REGULAR;

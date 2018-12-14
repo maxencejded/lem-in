@@ -31,6 +31,7 @@ typedef enum		e_flag
 typedef struct		s_node
 {
 	char			*name;
+	UINT			used;
 	UINT			height;
 	t_flag			flag;
 	t_visited		visited;
