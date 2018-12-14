@@ -1,6 +1,5 @@
 #include "lem_in.h"
 
-#include <stdlib.h>
 int		main(int argc, char **argv)
 {
 	t_hash			**map;
@@ -12,7 +11,7 @@ int		main(int argc, char **argv)
 	if (argc != 1 && argv[0])
 		ft_error("Usage: ./lem-in");
 	if ((n_ants = ants_nbr(0)) == 0)
-		exit_lem_in("Not enough Ants", map);
+		exit_lem_in("ERROR", map);
 	if ((map = h_map_create(HASH_MAP_SIZE)) == NULL)
 		exit_lem_in("ERROR", map);
 	if((graph = parse(0, map)) == NULL)
