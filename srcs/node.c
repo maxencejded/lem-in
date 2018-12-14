@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 00:06:12 by mjacques          #+#    #+#             */
-/*   Updated: 2018/12/13 18:24:19 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/12/14 15:28:09 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_node		*node_create(char *name)
 	new->name = ft_strdup(name);
 	new->used = 0;
 	new->visited = FALSE;
-	new->height = 0;
+	new->parent = NULL;
 	new->flag = REGULAR;
 	new->edges = NULL;
 	return (new);
