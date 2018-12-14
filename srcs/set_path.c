@@ -65,5 +65,5 @@ t_path			*set_path(t_node *sink)
 		set_edge_visited(next, node);
 		node = next;
 	}
-	return (len == 0 ? path : path_free(path));
+	return (len == 0 && node->flag == SOURCE ? path : path_free(path));
 }
