@@ -50,7 +50,7 @@ t_path			*set_path(t_node *sink)
 	t_path	*path;
 
 	path = init_path(sink, &node);
-	len = path->len - 1;
+	len = path->len - 2;
 	while (node)
 	{
 		path->nodes[len] = node;

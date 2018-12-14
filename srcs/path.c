@@ -9,7 +9,7 @@ t_path			*create_path(size_t size)
 		ft_error("not enough memory");
 	if ((path->nodes = (t_node**)malloc(sizeof(t_node*) * size)) == NULL)
 		ft_error("not enough memory");
-	path->len = (UINT)size - 1;
+	path->len = (UINT)size;
 	return (path);
 }
 
