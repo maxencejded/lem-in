@@ -83,4 +83,6 @@ void				set_edge_visited(t_node *a, t_node *b);
 t_path				*init_path(t_node *sink, t_node **next);
 t_path				*set_path(t_node *sink);
 
+void				paths_free(t_paths *paths);
+
 #endif
