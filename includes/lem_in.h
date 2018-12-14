@@ -73,5 +73,6 @@ t_path				*create_path(size_t size);
 t_paths				*create_paths(t_path *path);
 void				print_paths(t_paths *paths);
 void				print_path(t_path *path);
+void				path_free(t_path *path);
 
 #endif

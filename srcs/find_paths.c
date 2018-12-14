@@ -14,7 +14,8 @@ static t_node		*get_neighbor_with_min_height(t_node *node)
 	while (edge)
 	{
 		if (edge->node->flag != SINK && edge->node->height < min_h
-			&& edge->node->visited == FALSE)
+			&& edge->node->visited == FALSE
+			&& (edge->node->height || edge->node->flag == SOURCE))
 		{
 			min_h = edge->node->height;
 			neighbor_with_min_h = edge->node;
@@ -35,14 +36,20 @@ static t_path		*set_path(t_node *sink)
 	len = node->height + 1;
 	if ((path = create_path(len + 1)) == NULL)
 		ft_error("not enough memory");
-	path->nodes[len] = sink;
+	path->nodes[len--] = sink;
 	while (node)
 	{
-		path->nodes[node->height] = node;
+		path->nodes[len] = node;
 		if (node->flag == SOURCE)
 			break ;
 		node->visited = TRUE;
 		node = get_neighbor_with_min_height(node);
+		len--;
+	}
+	if (len)
+	{
+		path_free(path);
+		return (NULL);
 	}
 	return (path);
 }
@@ -52,7 +59,8 @@ static void			add_path(t_paths **tail, t_node *end)
 	t_path	*path;
 	t_paths	*next;
 
-	path = set_path(end);
+	if ((path = set_path(end)) == NULL)
+		return ;
 	if ((next = create_paths(path)) == NULL)
 		ft_error("not enough memory");
 	if (*tail)
@@ -97,7 +105,7 @@ t_paths				*find_shortest_paths(t_node *graph, unsigned int n_ants)
 			add_path(&tail, node);
 			if (head == NULL)
 				head = tail;
-			if (node->height >= n_ants)
+			if (tail && tail->path->len >= n_ants)
 				break ;
 		}
 		else

@@ -48,3 +48,9 @@ void				print_paths(t_paths *paths)
 		cur = cur->next;
 	}
 }
+
+void				path_free(t_path *path)
+{
+	free(path->nodes);
+	free(path);
+}
