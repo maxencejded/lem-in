@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 00:08:00 by mjacques          #+#    #+#             */
-/*   Updated: 2018/12/13 14:35:03 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/12/13 21:22:33 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,15 @@ void		node_print(t_node *node)
 		return ;
 	ft_printf("\033[92m%-8s\033[0m", node->name);
 	if (node->flag == SOURCE)
-		ft_putstr(" | SOURCE");
+		ft_putstr("(Start) ");
 	else if (node->flag == SINK)
-		ft_putstr(" | SINK");
-	ft_putchar('\n');
+		ft_putstr("(End)   ");
+	else
+		ft_putstr("        ");
 	tmp = node->edges;
-	if (tmp)
-		ft_printf("\t");
 	while (tmp)
 	{
-		ft_printf(" -> \033[31m%s\033[0m%c", tmp->node->name,
+		ft_printf("-> \033[31m%s\033[0m%c", tmp->node->name,
 			(tmp->next) ? '\t' : '\n');
 		tmp = tmp->next;
 	}
@@ -75,15 +74,14 @@ void		h_map_print(t_hash **map, size_t size)
 		while (++i < size)
 		{
 			on = 0;
-			(map[i]) ? ft_printf("%3zu -> ", i) : 0;
 			tmp = map[i];
 			while (tmp)
 			{
-				(on) ? ft_printf("   -> ") : 0;
 				node_print(tmp->data);
 				tmp = tmp->next;
 				on = 1;
 			}
 		}
 	}
+	ft_putchar('\n');
 }

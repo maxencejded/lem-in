@@ -19,6 +19,8 @@ int		main(int argc, char **argv)
 		exit_lem_in("ERROR", map);
 	if ((paths = find_shortest_paths(graph, n_ants)) == NULL)
 		exit_lem_in("ERROR", map);
+	ft_printf("Ants: %d\n", n_ants);
+	h_map_print(map, HASH_MAP_SIZE);
 	execute(paths, n_ants);
 	paths_free(paths);
 	free_map(map, HASH_MAP_SIZE);
