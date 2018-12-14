@@ -8,7 +8,7 @@ INCLUDES	= -I includes\
 FUNCTIONS	= main.c parse.c error.c\
 				hash_map.c hash_map_elem.c\
 				node.c edges.c\
-				path.c\
+				path.c set_path.c\
 				$(addprefix queue/, queue_new.c queue_free.c queue_add.c queue_pop.c) find_paths.c
 
 FILES		= $(addprefix srcs/, $(FUNCTIONS))
