@@ -31,6 +31,7 @@ void				print_path(t_path *path)
 	i = 0;
 	while (i < path->len)
 	{
+		ft_printf("%zu \n", i);
 		ft_printf("%s -> ", path->nodes[i]->name);
 		i++;
 	}

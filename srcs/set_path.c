@@ -31,7 +31,7 @@ t_path			*init_path(t_node *sink, t_node **next)
 	t_path	*path;
 
 	if ((node = get_neighbor_with_min_height(sink)) == NULL)
-		ft_error("no neighbor");
+		return (NULL);
 	len = node->height + 1;
 	if ((path = create_path(len + 1)) == NULL)
 		ft_error("not enough memory");
@@ -49,9 +49,10 @@ t_path			*set_path(t_node *sink)
 	t_node	*next;
 	t_path	*path;
 
-	path = init_path(sink, &node);
+	if ((path = init_path(sink, &node)) == NULL)
+		return (NULL);
 	len = path->len - 2;
-	while (node)
+	while (node && len)
 	{
 		path->nodes[len] = node;
 		if (node->flag == SOURCE)
