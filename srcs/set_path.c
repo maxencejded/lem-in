@@ -1,29 +1,6 @@
 #include <lem_in.h>
 #include <limits.h>
 
-static t_node	*get_neighbor_with_min_height(t_node *node)
-{
-	unsigned int	min_h;
-	t_node			*neighbor_with_min_h;
-	t_edge			*edge;
-
-	neighbor_with_min_h = NULL;
-	min_h = UINT_MAX;
-	edge = node->edges;
-	while (edge)
-	{
-		if (edge->node->flag != SINK && edge->node->height < min_h
-			&& edge->node->visited == FALSE && edge->visited == FALSE
-			&& (edge->node->height || edge->node->flag == SOURCE))
-		{
-			min_h = edge->node->height;
-			neighbor_with_min_h = edge->node;
-		}
-		edge = edge->next;
-	}
-	return (neighbor_with_min_h);
-}
-
 UINT			validate_path(t_node *sink)
 {
 	UINT	len;
@@ -36,7 +13,7 @@ UINT			validate_path(t_node *sink)
 	{
 		if (node->flag == SOURCE)
 			return (len);
-		if ((next = get_neighbor_with_min_height(node)) == NULL || next->height >= node->height)
+		if ((next = node->parent) == NULL)
 			return (0);
 		len += 1;
 		node = next;
@@ -63,8 +40,7 @@ t_path			*set_path(t_node *sink)
 			break ;
 		len--;
 		node->visited = TRUE;
-		if ((next = get_neighbor_with_min_height(node)) == NULL)
-			break ;
+		next = node->parent;
 		set_edge_visited(node, next);
 		set_edge_visited(next, node);
 		node = next;
