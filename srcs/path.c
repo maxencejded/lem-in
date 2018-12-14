@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   path.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/13 21:41:44 by tkobb             #+#    #+#             */
+/*   Updated: 2018/12/13 21:41:45 by tkobb            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <lem_in.h>
 #include <ft_printf.h>
 
@@ -48,11 +60,4 @@ void				print_paths(t_paths *paths)
 		print_path(cur->path);
 		cur = cur->next;
 	}
-}
-
-void				*path_free(t_path *path)
-{
-	free(path->nodes);
-	free(path);
-	return (NULL);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   find_paths.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/13 21:41:47 by tkobb             #+#    #+#             */
+/*   Updated: 2018/12/13 21:41:48 by tkobb            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <lem_in.h>
 #include <queue.h>
 
@@ -11,7 +23,10 @@ static void			add_path(t_paths **tail, t_node *end)
 	if ((next = create_paths(path)) == NULL)
 		ft_error("not enough memory");
 	if (*tail)
+	{
 		(*tail)->next = next;
+		*tail = (*tail)->next;
+	}
 	else
 		*tail = next;
 }
