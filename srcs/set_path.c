@@ -24,22 +24,24 @@ static t_node	*get_neighbor_with_min_height(t_node *node)
 	return (neighbor_with_min_h);
 }
 
-t_path			*init_path(t_node *sink, t_node **next)
+UINT			validate_path(t_node *sink)
 {
 	UINT	len;
 	t_node	*node;
-	t_path	*path;
+	t_node	*next;
 
-	if ((node = get_neighbor_with_min_height(sink)) == NULL)
-		return (NULL);
-	len = node->height + 1;
-	if ((path = create_path(len + 1)) == NULL)
-		ft_error("not enough memory");
-	path->nodes[len] = sink;
-	set_edge_visited(node, sink);
-	set_edge_visited(sink, node);
-	*next = node;
-	return (path);
+	len = 0;
+	node = sink;
+	while (node)
+	{
+		if (node->flag == SOURCE)
+			return (len);
+		if ((next = get_neighbor_with_min_height(node)) == NULL || next->height >= node->height)
+			return (0);
+		len += 1;
+		node = next;
+	}
+	return (0);
 }
 
 t_path			*set_path(t_node *sink)
@@ -49,9 +51,11 @@ t_path			*set_path(t_node *sink)
 	t_node	*next;
 	t_path	*path;
 
-	if ((path = init_path(sink, &node)) == NULL)
+	if ((len = validate_path(sink)) == 0)
 		return (NULL);
-	len = path->len - 2;
+	if ((path = create_path(len + 1)) == NULL)
+		return (NULL);
+	node = sink;
 	while (node)
 	{
 		path->nodes[len] = node;
@@ -65,5 +69,5 @@ t_path			*set_path(t_node *sink)
 		set_edge_visited(next, node);
 		node = next;
 	}
-	return (len == 0 && node->flag == SOURCE ? path : path_free(path));
+	return (path);
 }
