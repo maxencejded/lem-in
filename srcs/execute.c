@@ -23,6 +23,8 @@ static void	execute_path(t_path *path, UINT *remaining,
 	{
 		ft_printf("L%d-%s ", *ant_nbr, path->nodes[1]->name);
 		path->nodes[1]->used = *ant_nbr;
+		if (path->nodes[1]->flag == SINK)
+			*arrived += 1;
 		*ant_nbr += 1;
 		*remaining -= 1;
 	}
