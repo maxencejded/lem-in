@@ -43,6 +43,12 @@ static t_path		*set_path(t_node *sink)
 			break ;
 		node->visited = TRUE;
 		node = get_neighbor_with_min_height(node);
+		len--;
+	}
+	if (len != 1)
+	{
+		path_free(path);
+		return (NULL);
 	}
 	return (path);
 }
@@ -52,7 +58,8 @@ static void			add_path(t_paths **tail, t_node *end)
 	t_path	*path;
 	t_paths	*next;
 
-	path = set_path(end);
+	if ((path = set_path(end)) == NULL)
+		return ;
 	if ((next = create_paths(path)) == NULL)
 		ft_error("not enough memory");
 	if (*tail)
@@ -97,7 +104,7 @@ t_paths				*find_shortest_paths(t_node *graph, unsigned int n_ants)
 			add_path(&tail, node);
 			if (head == NULL)
 				head = tail;
-			if (tail->path->len >= n_ants)
+			if (tail && tail->path->len >= n_ants)
 				break ;
 		}
 		else
