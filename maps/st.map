@@ -1,0 +1,13 @@
+10
+##start
+entree 5 4
+##end
+sortie 5 3
+salle_1 5 4
+salle_2 5 3
+salle_3 5 3
+entree-sortie
+salle_1-entree
+salle_2-salle_1
+salle_3-salle_2
+sortie-salle_3
