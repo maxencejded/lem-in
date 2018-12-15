@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 21:41:47 by tkobb             #+#    #+#             */
-/*   Updated: 2018/12/14 15:55:18 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/12/14 16:00:57 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ void				reset_parents(t_node *graph)
 {
 	t_edge	*edge;
 
-	if ((graph->parent == NULL && graph->flag != SOURCE) || graph->visited == TRUE)
+	if ((graph->parent == NULL && graph->flag != SOURCE)
+		|| graph->visited == TRUE)
 		return ;
 	graph->parent = NULL;
 	edge = graph->edges;
