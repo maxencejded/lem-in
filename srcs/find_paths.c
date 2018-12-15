@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 21:41:47 by tkobb             #+#    #+#             */
-/*   Updated: 2018/12/14 17:15:25 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/12/14 17:21:18 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ int					find_shortest_path(t_node *graph, t_paths **tail)
 	{
 		if (node->flag == SINK)
 		{
+			queue_free(queue);
 			if (add_path(tail, node))
 				return (0);
-			queue_free(queue);
 			return (1);
 		}
 		process_edges(node, &queue);
