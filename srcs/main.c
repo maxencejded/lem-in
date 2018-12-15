@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:22:15 by tkobb             #+#    #+#             */
-/*   Updated: 2018/12/14 17:55:18 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/12/14 17:58:33 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int		main(int argc, char **argv)
 		exit_lem_in("ERROR", map);
 	ft_printf("Ants: %d\n", n_ants);
 	h_map_print(map, HASH_MAP_SIZE);
-	print_paths(paths);
 	execute(paths, n_ants);
 	free_paths(paths);
 	free_map(map, HASH_MAP_SIZE);
