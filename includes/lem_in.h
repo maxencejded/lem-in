@@ -86,12 +86,12 @@ t_path				*create_path(size_t size);
 t_paths				*create_paths(t_path *path);
 void				print_paths(t_paths *paths);
 void				print_path(t_path *path);
-void				*path_free(t_path *path);
+void				*free_path(t_path *path);
 void				set_edge_visited(t_node *a, t_node *b);
 
 t_path				*init_path(t_node *sink, t_node **next);
 t_path				*set_path(t_node *sink);
 
-void				paths_free(t_paths *paths);
+void				free_paths(t_paths *paths);
 
 #endif

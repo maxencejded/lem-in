@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:22:15 by tkobb             #+#    #+#             */
-/*   Updated: 2018/12/14 17:22:15 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/12/14 17:55:18 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		main(int argc, char **argv)
 		exit_lem_in("ERROR", map);
 	if ((map = h_map_create(HASH_MAP_SIZE)) == NULL)
 		exit_lem_in("ERROR", map);
-	if((graph = parse(0, map)) == NULL)
+	if ((graph = parse(0, map)) == NULL)
 		exit_lem_in("ERROR", map);
 	if ((paths = find_shortest_paths(graph, n_ants)) == NULL)
 		exit_lem_in("ERROR", map);
@@ -34,7 +34,7 @@ int		main(int argc, char **argv)
 	h_map_print(map, HASH_MAP_SIZE);
 	print_paths(paths);
 	execute(paths, n_ants);
-	paths_free(paths);
+	free_paths(paths);
 	free_map(map, HASH_MAP_SIZE);
 	return (0);
 }

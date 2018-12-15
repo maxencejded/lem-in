@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 00:08:00 by mjacques          #+#    #+#             */
-/*   Updated: 2018/12/13 21:22:33 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/12/14 17:32:53 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,48 +40,24 @@ void		free_map(t_hash **map, size_t size)
 	free(map);
 }
 
-void		node_print(t_node *node)
+void		*free_path(t_path *path)
 {
-	t_edge	*tmp;
-
-	if (!node)
-		return ;
-	ft_printf("\033[92m%-8s\033[0m", node->name);
-	if (node->flag == SOURCE)
-		ft_putstr("(Start) ");
-	else if (node->flag == SINK)
-		ft_putstr("(End)   ");
-	else
-		ft_putstr("        ");
-	tmp = node->edges;
-	while (tmp)
-	{
-		ft_printf("-> \033[31m%s\033[0m%c", tmp->node->name,
-			(tmp->next) ? '\t' : '\n');
-		tmp = tmp->next;
-	}
+	free(path->nodes);
+	free(path);
+	return (NULL);
 }
 
-void		h_map_print(t_hash **map, size_t size)
+void		free_paths(t_paths *paths)
 {
-	size_t	i;
-	int		on;
-	t_hash	*tmp;
+	t_paths	*cur;
+	t_paths	*next;
 
-	if (map)
+	cur = paths;
+	while (cur)
 	{
-		i = -1;
-		while (++i < size)
-		{
-			on = 0;
-			tmp = map[i];
-			while (tmp)
-			{
-				node_print(tmp->data);
-				tmp = tmp->next;
-				on = 1;
-			}
-		}
+		free_path(cur->path);
+		next = cur->next;
+		free(cur);
+		cur = next;
 	}
-	ft_putchar('\n');
 }

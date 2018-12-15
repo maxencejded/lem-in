@@ -6,12 +6,11 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 16:01:05 by tkobb             #+#    #+#             */
-/*   Updated: 2018/12/14 17:18:47 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/12/14 17:51:00 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <lem_in.h>
-#include <limits.h>
+#include "lem_in.h"
 
 static t_edge	*get_edge(t_node *from, t_node *to)
 {

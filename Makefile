@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2018/12/14 17:33:26 by mjacques          #+#    #+#              #
+#    Updated: 2018/12/14 17:50:34 by mjacques         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 CC			= gcc
 RM			= rm -f
 NAME		= lem-in
@@ -5,13 +17,17 @@ CFLAGS		= -Wall -Wextra -Werror -g
 LIBFT 		= libft/libft.a
 INCLUDES	= -I includes\
 			  -I libft/includes
-FUNCTIONS	= main.c parse.c error.c\
-				hash_map.c hash_map_elem.c\
-				node.c edges.c\
-				path.c set_path.c paths_free.c\
-				execute.c\
-				$(addprefix queue/, queue_new.c queue_free.c queue_add.c queue_pop.c) find_paths.c
 
+BASE		= main.c error.c print.c
+PARSE		= parse.c node.c edges.c
+PATH_MAP	= path.c set_path.c find_paths.c
+EXECUTE		= execute.c
+HASH_MAP	= hash_map.c hash_map_elem.c
+QUEUE		= queue_new.c queue_free.c queue_add.c queue_pop.c
+
+FUNCTIONS	= $(BASE) $(PARSE) $(PATH_MAP) $(EXECUTE)\
+				$(addprefix queue/, $(QUEUE))\
+				$(addprefix hash_map/, $(HASH_MAP))
 FILES		= $(addprefix srcs/, $(FUNCTIONS))
 OBJECTS		= $(FILES:.c=.o)
 
