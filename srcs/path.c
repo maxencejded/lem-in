@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 21:41:44 by tkobb             #+#    #+#             */
-/*   Updated: 2018/12/14 12:18:03 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/12/14 16:00:25 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_path			*create_path(size_t size)
 	return (path);
 }
 
-t_paths				*create_paths(t_path *path)
+t_paths			*create_paths(t_path *path)
 {
 	t_paths *p;
 
@@ -36,7 +36,7 @@ t_paths				*create_paths(t_path *path)
 	return (p);
 }
 
-void				print_path(t_path *path)
+void			print_path(t_path *path)
 {
 	size_t i;
 
@@ -49,7 +49,7 @@ void				print_path(t_path *path)
 	ft_printf(" [%d]\n", path->len);
 }
 
-void				print_paths(t_paths *paths)
+void			print_paths(t_paths *paths)
 {
 	t_paths *cur;
 
