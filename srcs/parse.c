@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 00:06:16 by mjacques          #+#    #+#             */
-/*   Updated: 2018/12/14 15:33:55 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/12/14 16:24:17 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,14 @@ char			*create_anthill(int fd, t_hash **map, UINT *st, t_node **start)
 		if (line[0] != COMMENT_CHAR)
 		{
 			if (line[0] == 'L' || !(node_insert(line, flags, map, start)))
+			{
+				ret = 0;
 				break ;
+			}
 		}
 		flags = flag_update(line, st);
 	}
-	if (line && !*line)
-		ft_strdel(&line);
-	return (line);
+	return ((ret) ? line : NULL);
 }
 
 void			create_link(int fd, t_hash **map, char *line)
