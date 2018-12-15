@@ -6,20 +6,20 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 21:41:47 by tkobb             #+#    #+#             */
-/*   Updated: 2018/12/14 16:00:57 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/12/14 17:15:25 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
 #include <queue.h>
 
-static void			add_path(t_paths **tail, t_node *end)
+static int			add_path(t_paths **tail, t_node *end)
 {
 	t_path	*path;
 	t_paths	*next;
 
 	if ((path = set_path(end)) == NULL)
-		return ;
+		return (1);
 	if ((next = create_paths(path)) == NULL)
 		ft_error("not enough memory");
 	if (*tail)
@@ -29,6 +29,7 @@ static void			add_path(t_paths **tail, t_node *end)
 	}
 	else
 		*tail = next;
+	return (0);
 }
 
 static void			process_edges(t_node *node, t_queue **queue)
@@ -60,7 +61,8 @@ int					find_shortest_path(t_node *graph, t_paths **tail)
 	{
 		if (node->flag == SINK)
 		{
-			add_path(tail, node);
+			if (add_path(tail, node))
+				return (0);
 			queue_free(queue);
 			return (1);
 		}
