@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 16:01:05 by tkobb             #+#    #+#             */
-/*   Updated: 2018/12/14 17:15:18 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/12/14 17:18:47 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 static t_edge	*get_edge(t_node *from, t_node *to)
 {
 	t_edge	*edge;
-	
+
 	edge = from->edges;
 	while (edge)
 	{
@@ -42,7 +42,8 @@ UINT			validate_path(t_node *sink)
 			return (len);
 		if ((next = node->parent) == NULL)
 			return (0);
-		if ((edge = get_edge(node->parent, node)) == NULL || edge->visited == TRUE)
+		if ((edge = get_edge(node->parent, node)) == NULL
+			|| edge->visited == TRUE)
 			return (0);
 		len += 1;
 		node = next;
