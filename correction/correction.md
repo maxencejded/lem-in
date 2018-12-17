@@ -40,15 +40,18 @@ Basically, we mean that, if the project displays either something different than
 - Evaluate the implementation of error management when there is no room.
 - Evaluate the implementation of error management when there is no ant.
 - Evaluate the implementation of error management when there is no ##start / ##end.
+
 ```Yes```   ```No```
 
 ### Comments and commands
 - The program accepts ant-farms with comments.
 - The program accepts ant-farms with commands other than ##start ##end.
+
 ```Yes```   ```No```
 
 ### No possible solution
 Evaluate the implementation of error management when there is no possible solution with the given ant-farm.
+
 ```Yes```   ```No```
 
 ### Output format
@@ -56,6 +59,7 @@ The output format must be observed.
 
 ### Ant-farm composition.
 The ant-farm's composition is displayed on the standard output, as well as commands and comments.
+
 ```Yes```   ```No```
 
 ### Ants movements
@@ -63,6 +67,7 @@ The movements are printed with the right format:
 	- 1 line per turn
 	- N movements per turn
 	- A movement is defined as follow "Lx-y" where x is the ant's number and y a room's name
+
 ```Yes```   ```No```
 
 ### Explainations
@@ -72,6 +77,7 @@ Here the student will have to explain her/his approach and justify her/his choic
 - How does it work? Has the corrector understood how the algorithm works? This step is necessary for the validation of the project.
 - Take all the time you need to understand.
 - Ask your questions that are useful for understanding.
+
 ```Yes```   ```No```
 
 ### Test the algorithm
@@ -84,10 +90,12 @@ Valid means:
 - That at the end of the program all ants are in ##end
 
 If none of your tests obtain an invalid solution, check Yes. Does the program always provide a right solution?
+
 ```Yes```   ```No```
 
 #### Flow management
 Does the program use several paths when they do not overlay each other and that this is necessary? You must use the generator given as an example with the --flow-one option, then --flow-ten, then --flow-thousand. The generator, indicates the number of lines expected, any difference with this expectation shows a poorly optimized algorithm. These cases are easy to implement and do not require any elaborate algorithms. Therefore, we will only tolerate a difference of a maximum of 3 lines here. Otherwise it means that the paths are misused, or that not all of them are found by the algorithm. The student has then misunderstood the subject, check No and the correction stops here.
+
 ```Yes```   ```No```
 
 #### Time complexity
@@ -99,6 +107,7 @@ Measure the execution time of the program, and note on several tests.
 3. the program runs in 9 seconds maximum.
 4. very well, the program runs in 6 seconds maximum.
 5. Well done, perfect, the program always runs around 3 seconds or less.
+
 ```Rate it from 0 (failed) through 5 (excellent)```
 
 ### Algorithm's accuracy
@@ -114,6 +123,7 @@ Use your imagination to test the consistency and the accuracy of the algorithm.
 3. good algorithm but the result is sometimes 3 to 10 lines higher than the generator.
 4. optimized algorithm but the result is sometimes one to two lines higher than the generator.
 5. everything is absolutely perfect, well done, the algorithm always gives a number of lines equal or lower than that of the generator.
+
 ```Rate it from 0 (failed) through 5 (excellent)```
 
 ### Bonus
@@ -122,14 +132,17 @@ In this section you can evaluate up to 5 operational and well implemented bonuse
 Bonus example:
 - Graphic visualizer; if you find it very well made, you can give more than 1 point for it.
 - ...
+
 ```Rate it from 0 (failed) through 5 (excellent)```
 
 ### Ratings
-Don’t forget to check the flag corresponding to the defense
+#### Don’t forget to check the flag corresponding to the defense
+
 ```Ok``` | ```Outstanding project```
 
-```Empty work``` | ```Incomplete work``` | ```No author file``` | ```Invalid compilation```
-```Norme``` | ```Cheat``` | ```Crash``` | ```Incomplete group``` | ```Leaks``` | ```Forbidden function```
+```Empty work``` | ```Incomplete work``` | ```No author file``` | ```Invalid compilation``` | ```Norme``` | ```Cheat``` | ```Crash``` | ```Incomplete group``` | ```Leaks``` | ```Forbidden function```
 
 ### Conclusion
 Leave a comment on this evaluation
+
+```Type Comment Here```
