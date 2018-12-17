@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
+/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 16:00:42 by tkobb             #+#    #+#             */
-/*   Updated: 2018/12/14 17:52:52 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/12/17 05:39:39 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
 static void	execute_path(t_path *path, UINT *remaining,
-	UINT *arrived, UINT *ant_nbr)
+	UINT *arrived, UINT *ant_nbr, char is_shortest_path)
 {
 	UINT	i;
 
@@ -31,7 +31,7 @@ static void	execute_path(t_path *path, UINT *remaining,
 		}
 		i -= 1;
 	}
-	if (*remaining != 0)
+	if (*remaining != 0 && (is_shortest_path || *remaining >= path->len))
 	{
 		ft_printf("L%d-%s ", *ant_nbr, path->nodes[1]->name);
 		path->nodes[1]->used = *ant_nbr;
@@ -57,7 +57,7 @@ int			execute(t_paths *paths, UINT n_ants)
 		path = paths;
 		while (path)
 		{
-			execute_path(path->path, &remaining, &arrived, &ant_nbr);
+			execute_path(path->path, &remaining, &arrived, &ant_nbr, path->path->len == paths->path->len);
 			path = path->next;
 		}
 		ft_putchar('\n');
