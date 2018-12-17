@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_paths.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
+/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 21:41:47 by tkobb             #+#    #+#             */
-/*   Updated: 2018/12/14 17:21:18 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/12/17 05:06:12 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,10 @@ static void			process_edges(t_node *node, t_queue **queue)
 	edge = node->edges;
 	while (edge)
 	{
-		if ((edge->node->parent == NULL && edge->node->flag != SOURCE)
-			|| (edge->node->flag == SINK && edge->visited == FALSE
-			&& node->visited == FALSE))
+		if ((edge->node->height == 0 && edge->node->flag != SOURCE)
+			|| edge->node->flag == SINK)
 		{
-			edge->node->parent = node;
+			edge->node->height = node->height + 1;
 			queue_add(queue, edge->node);
 		}
 		edge = edge->next;
@@ -72,18 +71,18 @@ int					find_shortest_path(t_node *graph, t_paths **tail)
 	return (0);
 }
 
-void				reset_parents(t_node *graph)
+void				reset_heights(t_node *graph)
 {
 	t_edge	*edge;
 
-	if ((graph->parent == NULL && graph->flag != SOURCE)
+	if ((graph->height == 0 && graph->flag != SOURCE)
 		|| graph->visited == TRUE)
 		return ;
-	graph->parent = NULL;
+	graph->height = 0;
 	edge = graph->edges;
 	while (edge)
 	{
-		reset_parents(edge->node);
+		reset_heights(edge->node);
 		edge = edge->next;
 	}
 }
@@ -101,7 +100,7 @@ t_paths				*find_shortest_paths(t_node *graph, unsigned int n_ants)
 			head = tail;
 		if (tail && tail->path->len >= n_ants)
 			break ;
-		reset_parents(graph);
+		reset_heights(graph);
 	}
 	return (head);
 }

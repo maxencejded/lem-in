@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
+/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:16:56 by tkobb             #+#    #+#             */
-/*   Updated: 2018/12/14 17:16:56 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/12/17 04:53:31 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct		s_node
 {
 	char			*name;
 	UINT			used;
-	struct s_node	*parent;
+	UINT			height;
 	t_flag			flag;
 	t_visited		visited;
 	t_edge			*edges;
