@@ -6,7 +6,7 @@
 /*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 16:01:05 by tkobb             #+#    #+#             */
-/*   Updated: 2018/12/17 05:02:51 by theo             ###   ########.fr       */
+/*   Updated: 2018/12/17 05:28:48 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,7 @@ static t_node	*neighbor_with_min_height(t_node *node)
 	}
 	return (neighbor_with_min_h);
 }
-/*
-static t_edge	*get_edge(t_node *from, t_node *to)
-{
-	t_edge	*edge;
 
-	edge = from->edges;
-	while (edge)
-	{
-		if (edge->node == to)
-			return (edge);
-		edge = edge->next;
-	}
-	return (NULL);
-}
-*/
 UINT			validate_path(t_node *sink)
 {
 	UINT	len;
