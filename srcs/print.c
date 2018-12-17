@@ -37,7 +37,6 @@ void		node_print(t_node *node)
 void		h_map_print(t_hash **map, size_t size)
 {
 	size_t	i;
-	int		on;
 	t_hash	*tmp;
 
 	if (map)
@@ -45,13 +44,11 @@ void		h_map_print(t_hash **map, size_t size)
 		i = -1;
 		while (++i < size)
 		{
-			on = 0;
 			tmp = map[i];
 			while (tmp)
 			{
 				node_print(tmp->data);
 				tmp = tmp->next;
-				on = 1;
 			}
 		}
 	}
