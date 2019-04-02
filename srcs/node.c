@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   node.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
+/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 00:06:12 by mjacques          #+#    #+#             */
-/*   Updated: 2018/12/14 15:28:09 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/12/17 04:54:54 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_node		*node_create(char *name)
 	new->name = ft_strdup(name);
 	new->used = 0;
 	new->visited = FALSE;
-	new->parent = NULL;
+	new->height = 0;
 	new->flag = REGULAR;
 	new->edges = NULL;
 	return (new);

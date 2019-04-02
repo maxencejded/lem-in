@@ -3,27 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   set_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
+/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 16:01:05 by tkobb             #+#    #+#             */
-/*   Updated: 2018/12/14 17:51:00 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/12/17 05:28:48 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+#include <limits.h>
 
-static t_edge	*get_edge(t_node *from, t_node *to)
+static t_node	*neighbor_with_min_height(t_node *node)
 {
-	t_edge	*edge;
+	unsigned int	min_h;
+	t_node			*neighbor_with_min_h;
+	t_edge			*edge;
 
-	edge = from->edges;
+ 	neighbor_with_min_h = NULL;
+	min_h = UINT_MAX;
+	edge = node->edges;
 	while (edge)
 	{
-		if (edge->node == to)
-			return (edge);
+		if (edge->node->flag != SINK && edge->node->height < min_h
+			&& edge->node->visited == FALSE && edge->visited == FALSE
+			&& (edge->node->height || edge->node->flag == SOURCE))
+		{
+			min_h = edge->node->height;
+			neighbor_with_min_h = edge->node;
+		}
 		edge = edge->next;
 	}
-	return (NULL);
+	return (neighbor_with_min_h);
 }
 
 UINT			validate_path(t_node *sink)
@@ -31,7 +41,6 @@ UINT			validate_path(t_node *sink)
 	UINT	len;
 	t_node	*node;
 	t_node	*next;
-	t_edge	*edge;
 
 	len = 0;
 	node = sink;
@@ -39,10 +48,7 @@ UINT			validate_path(t_node *sink)
 	{
 		if (node->flag == SOURCE)
 			return (len);
-		if ((next = node->parent) == NULL)
-			return (0);
-		if ((edge = get_edge(node->parent, node)) == NULL
-			|| edge->visited == TRUE)
+		if ((next = neighbor_with_min_height(node)) == NULL || next->height >= node->height)
 			return (0);
 		len += 1;
 		node = next;
@@ -69,7 +75,7 @@ t_path			*set_path(t_node *sink)
 			break ;
 		len--;
 		node->visited = TRUE;
-		next = node->parent;
+		next = neighbor_with_min_height(node);
 		set_edge_visited(node, next);
 		set_edge_visited(next, node);
 		node = next;
