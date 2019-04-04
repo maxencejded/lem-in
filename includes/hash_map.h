@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 00:06:54 by mjacques          #+#    #+#             */
-/*   Updated: 2018/12/13 00:07:06 by mjacques         ###   ########.fr       */
+/*   Updated: 2019/04/02 16:05:39 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 typedef struct		s_hash
 {
-	char			*string;
+	char			*key;
 	void			*data;
 	struct s_hash	*next;
 }					t_hash;

@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 00:08:00 by mjacques          #+#    #+#             */
-/*   Updated: 2018/12/14 17:32:53 by mjacques         ###   ########.fr       */
+/*   Updated: 2019/04/03 17:50:12 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,28 @@ void		free_map(t_hash **map, size_t size)
 	free(map);
 }
 
-void		*free_path(t_path *path)
+void		node_free(t_node *node)
+{
+	t_edge	*edges;
+	t_edge	*tmp;
+
+	if (!node)
+		return ;
+	ft_strdel(&node->name);
+	edges = node->edges;
+	while (edges)
+	{
+		tmp = edges;
+		edges = edges->next;
+		free(tmp);
+	}
+	free(node);
+}
+
+void		free_path(t_path *path)
 {
 	free(path->nodes);
 	free(path);
-	return (NULL);
 }
 
 void		free_paths(t_paths *paths)

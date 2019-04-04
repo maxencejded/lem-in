@@ -6,109 +6,103 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 00:06:16 by mjacques          #+#    #+#             */
-/*   Updated: 2018/12/14 16:24:17 by mjacques         ###   ########.fr       */
+/*   Updated: 2019/04/03 17:51:48 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-UINT			ants_nbr(int fd)
-{
-	int		nbr;
-	char	*line;
-
-	nbr = 0;
-	if (get_next_line(fd, &line) > 0 && *line)
-	{
-		nbr = ft_atoi(line);
-		ft_strdel(&line);
-	}
-	return (nbr);
-}
-
-static t_flag	flag_update(char *str, UINT *st)
+static t_flag	flag_init(char *str, char *info)
 {
 	t_flag	flag;
 
 	flag = REGULAR;
-	if (str[0] == COMMENT_CHAR && str[1] == COMMENT_CHAR)
+	if (str[0] == COMMENT && str[1] == COMMENT)
 	{
 		if (ft_strcmp(&str[2], "start") == 0)
 		{
 			flag = SOURCE;
-			st[0] = st[0] << 1;
-			st[0] += 1;
+			*info |= (*info & 1) ? 8 : 1;
 		}
 		else if (ft_strcmp(&str[2], "end") == 0)
 		{
 			flag = SINK;
-			st[1] = st[1] << 1;
-			st[1] += 1;
+			*info |= (*info & 2) ? 8 : 2;
 		}
 	}
 	ft_strdel(&str);
 	return (flag);
 }
 
-char			*create_anthill(int fd, t_hash **map, UINT *st, t_node **start)
+static char		*create_anthill(t_hash **map, t_node **start, char *info)
 {
 	int		ret;
 	char	*line;
 	t_flag	flags;
 
 	flags = REGULAR;
-	while (((ret = get_next_line(fd, &line)) > 0) && line && *line
-		&& !ft_strchr(line, '-'))
+	while ((ret = get_next_line(0, &line)) && *line && !ft_strchr(line, '-'))
 	{
-		if (line[0] != COMMENT_CHAR)
+		if (*line != COMMENT)
 		{
-			if (line[0] == 'L' || !(node_insert(line, flags, map, start)))
+			if (*line == 'L')
 			{
-				ret = 0;
+				ret = 2;
 				break ;
 			}
+			if (node_add(map, start, line, flags) == NULL)
+				return (NULL);
 		}
-		flags = flag_update(line, st);
+		flags = flag_init(line, info);
 	}
-	return ((ret) ? line : NULL);
+	if (ret == 1 && ((*info & 3) == 3))
+		return (line);
+	if (ret == 2)
+		ft_strdel(&line);
+	return (NULL);
 }
 
-void			create_link(int fd, t_hash **map, char *line)
+static int		find_middle(char *line)
 {
 	char	*ret;
 
 	ret = ft_strchr(line, '-');
-	if (line[0] != COMMENT_CHAR && ret)
-		node_link(line, map, ret - line);
-	else if (line[0] != COMMENT_CHAR && !ret)
-	{
-		ft_strdel(&line);
-		return ;
-	}
+	if (line[0] != COMMENT && ret)
+		return (ret - line);
+	return (0);
+}
+
+static void		create_link(t_hash **map, char *line)
+{
+	int		middle;
+
+	if ((middle = find_middle(line)) != 0)
+		node_link(map, line, middle);
 	ft_strdel(&line);
-	while ((get_next_line(fd, &line) > 0) && line && *line)
+	if (middle == 0)
+		return ;
+	while (get_next_line(0, &line) && *line)
 	{
-		ret = ft_strchr(line, '-');
-		if (line[0] != COMMENT_CHAR && ret)
-			node_link(line, map, ret - line);
-		else if (line[0] != COMMENT_CHAR && !ret)
+		if ((middle = find_middle(line)) != 0)
+			node_link(map, line, middle);
+		else
 			break ;
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);
 }
 
-t_node			*parse(int fd, t_hash **map)
+t_node			*parse(t_hash **map)
 {
+	char	info;
 	char	*line;
-	UINT	st[2];
 	t_node	*start;
 
+	info = 0;
 	start = NULL;
-	ft_bzero(st, sizeof(UINT) * 2);
-	line = create_anthill(fd, map, st, &start);
-	if (!line)
+	line = create_anthill(map, &start, &info);
+	if (!line || (info & 8))
 		exit_lem_in("ERROR", map);
-	create_link(fd, map, line);
-	return ((st[0] == 1 && st[1] == 1) ? start : NULL);
+	create_link(map, line);
+	return (start);
 }

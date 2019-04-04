@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 00:06:38 by mjacques          #+#    #+#             */
-/*   Updated: 2018/12/13 01:03:19 by mjacques         ###   ########.fr       */
+/*   Updated: 2019/04/02 16:07:19 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static t_hash	*elem_create(char *key, void *data)
 
 	if (!(new = malloc(sizeof(t_hash))))
 		return (NULL);
-	new->string = key;
+	new->key = key;
 	new->data = data;
 	new->next = NULL;
 	return (new);
@@ -72,14 +72,14 @@ void			*elem_find(t_hash **map, size_t size, char *key)
 	unsigned int	hash;
 
 	hash = hash_fnv_onea(key) % size;
-	if (!map[hash] || map[hash]->string == NULL)
+	if (!map[hash] || map[hash]->key == NULL)
 		return (NULL);
 	else if (map[hash]->next == NULL)
 		return (map[hash]->data);
 	else
 	{
 		tmp = map[hash];
-		while ((ret = ft_strcmp(key, tmp->string)) != 0 && tmp->next)
+		while ((ret = ft_strcmp(key, tmp->key)) != 0 && tmp->next)
 			tmp = tmp->next;
 		return ((ret == 0) ? tmp->data : NULL);
 	}
