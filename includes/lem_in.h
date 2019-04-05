@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:16:56 by tkobb             #+#    #+#             */
-/*   Updated: 2019/04/05 14:55:16 by mjacques         ###   ########.fr       */
+/*   Updated: 2019/04/05 14:58:02 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,9 @@ typedef struct		s_paths
 	struct s_paths	*next;
 }					t_paths;
 
-# define FLAGS "apq"
-# define FLAG_A 1
-# define FLAG_P 2
-# define FLAG_Q 4
+# define FLAGS "pq"
+# define FLAG_P 1
+# define FLAG_Q 2
 
 void				flags(int ac, char **av, unsigned char *flags);
 
