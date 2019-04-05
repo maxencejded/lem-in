@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:22:15 by tkobb             #+#    #+#             */
-/*   Updated: 2019/04/05 00:34:06 by mjacques         ###   ########.fr       */
+/*   Updated: 2019/04/05 01:18:58 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int			main(int argc, char **argv)
 		exit_lem_in("ERROR", map);
 	ft_printf("Ants: %d\n", n_ants);
 	execute(path_use, n_ants, size);
-	free_path(path_use, size);
-	free_map(map, DICT_SIZE);
+	path_free(path_use, size);
+	map_free(map, DICT_SIZE);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:16:56 by tkobb             #+#    #+#             */
-/*   Updated: 2019/04/05 00:56:44 by mjacques         ###   ########.fr       */
+/*   Updated: 2019/04/05 01:19:14 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,9 @@ void				dict_print(t_dict **dict, size_t size);
 void				print_paths(t_path **path, int size);
 
 int					exit_lem_in(char *str, t_dict **map);
-void				free_map(t_dict **map, size_t size);
+void				map_free(t_dict **map, size_t size);
 void				node_free(t_node *node);
-void				free_path(t_path **path, int size);
+void				path_free(t_path **path, int size);
 void				free_paths(t_paths *paths);
 
 #endif

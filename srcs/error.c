@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 00:08:00 by mjacques          #+#    #+#             */
-/*   Updated: 2019/04/05 00:33:41 by mjacques         ###   ########.fr       */
+/*   Updated: 2019/04/05 01:18:50 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 int			exit_lem_in(char *str, t_dict **map)
 {
-	dict_free(map, DICT_SIZE);
+	map_free(map, DICT_SIZE);
 	ft_putendl(str);
 	exit(-1);
 }
 
-void		free_map(t_dict **map, size_t size)
+void		map_free(t_dict **map, size_t size)
 {
 	size_t	i;
 	t_dict	*tmp;
@@ -58,7 +58,7 @@ void		node_free(t_node *node)
 	free(node);
 }
 
-void		free_path(t_path **path, int size)
+void		path_free(t_path **path, int size)
 {
 	int		i;
 
