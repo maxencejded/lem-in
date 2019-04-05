@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 00:06:16 by mjacques          #+#    #+#             */
-/*   Updated: 2019/04/03 17:51:48 by mjacques         ###   ########.fr       */
+/*   Updated: 2019/04/05 13:20:54 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ static t_flag	flag_init(char *str, char *info)
 	return (flag);
 }
 
-static char		*create_anthill(t_dict **map, t_node **start, char *info)
+static char		*create_anthill(t_dict **map, t_node **start, char *info,
+					UCHAR options)
 {
 	int		ret;
 	char	*line;
@@ -53,6 +54,7 @@ static char		*create_anthill(t_dict **map, t_node **start, char *info)
 			if (node_add(map, start, line, flags) == NULL)
 				return (NULL);
 		}
+		(options & FLAG_Q) ? 0 : ft_putendl(line);
 		flags = flag_init(line, info);
 	}
 	if (ret == 1 && ((*info & 3) == 3))
@@ -72,7 +74,7 @@ static int		find_middle(char *line)
 	return (0);
 }
 
-static void		create_link(t_dict **map, char *line)
+static void		create_link(t_dict **map, char *line, UCHAR options)
 {
 	int		middle;
 
@@ -87,12 +89,15 @@ static void		create_link(t_dict **map, char *line)
 			node_link(map, line, middle);
 		else
 			break ;
+		(options & FLAG_Q) ? 0 : ft_putendl(line);
 		ft_strdel(&line);
 	}
+	(options & FLAG_Q) ? 0 : ft_putendl(line);
+	(options & FLAG_Q) ? 0 : ft_putchar('\n');
 	ft_strdel(&line);
 }
 
-t_node			*parse(t_dict **map)
+t_node			*parse(t_dict **map, UCHAR options)
 {
 	char	info;
 	char	*line;
@@ -100,9 +105,9 @@ t_node			*parse(t_dict **map)
 
 	info = 0;
 	start = NULL;
-	line = create_anthill(map, &start, &info);
+	line = create_anthill(map, &start, &info, options);
 	if (!line || (info & 8))
 		exit_lem_in("ERROR", map);
-	create_link(map, line);
+	create_link(map, line, options);
 	return (start);
 }

@@ -6,17 +6,17 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:22:15 by tkobb             #+#    #+#             */
-/*   Updated: 2019/04/05 01:18:58 by mjacques         ###   ########.fr       */
+/*   Updated: 2019/04/05 14:54:44 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static int	ants_nbr(void)
+static int		ants_nbr(UCHAR options)
 {
-	int		nbr;
-	char	*line;
-	char	*end;
+	int			nbr;
+	char		*line;
+	char		*end;
 
 	nbr = 0;
 	if (get_next_line(0, &line) && *line)
@@ -27,34 +27,30 @@ static int	ants_nbr(void)
 			ft_strdel(&line);
 			return (0);
 		}
+		(options & FLAG_Q) ? 0 : ft_putendl(line);
 		ft_strdel(&line);
 	}
 	return (nbr);
 }
 
-int			main(int argc, char **argv)
+int				main(int argc, char **argv)
 {
-	int				size;
-	int				n_ants;
-	t_dict			**map;
-	t_node			*source;
-	t_path			**path_use;
+	int			n_ants;
+	UCHAR		options;
+	t_dict		**map;
+	t_node		*source;
 
-	size = 0;
+	options = 0;
 	map = NULL;
-	if (argc != 1 && argv[0])
-		ft_error("Usage: ./lem-in");
-	if ((n_ants = ants_nbr()) <= 0)
+	flags(argc, argv, &options);
+	if ((n_ants = ants_nbr(options)) <= 0)
 		exit_lem_in("ERROR", map);
 	if ((map = dict_init(DICT_SIZE)) == NULL)
 		exit_lem_in("ERROR", map);
-	if ((source = parse(map)) == NULL)
+	if ((source = parse(map, options)) == NULL)
 		exit_lem_in("ERROR", map);
-	if ((path_use = shortest_paths(source, n_ants, &size)) == NULL)
+	if (shortest_paths(source, n_ants, options) == 0)
 		exit_lem_in("ERROR", map);
-	ft_printf("Ants: %d\n", n_ants);
-	execute(path_use, n_ants, size);
-	path_free(path_use, size);
 	map_free(map, DICT_SIZE);
 	return (0);
 }

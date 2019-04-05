@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 21:41:47 by tkobb             #+#    #+#             */
-/*   Updated: 2019/04/05 00:27:44 by mjacques         ###   ########.fr       */
+/*   Updated: 2019/04/05 14:54:31 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,14 @@ void				reset_heights(t_node *graph)
 	}
 }
 
-t_path				**shortest_paths(t_node *source, UINT n_ants, int *size)
+int					shortest_paths(t_node *source, UINT n_ants, UCHAR options)
 {
+	int				size;
 	t_paths			*head;
 	t_paths			*tail;
-	t_path			**path_use;
+	t_path			**paths;
 
+	size = 0;
 	tail = NULL;
 	head = NULL;
 	while ((find_shortest_path(source, &tail)))
@@ -103,6 +105,11 @@ t_path				**shortest_paths(t_node *source, UINT n_ants, int *size)
 			break ;
 		reset_heights(source);
 	}
-	path_use = dispatch(head, n_ants, size);
-	return (path_use);
+	if ((paths = dispatch(head, n_ants, &size)) == NULL)
+		return (0);
+	(options & FLAG_P) ? print_paths(paths, size) : 0;
+	(options & FLAG_Q) ? 0 : ft_printf("Ants: %d\n", n_ants);
+	execute(paths, n_ants, size);
+	path_free(paths, size);
+	return (1);
 }

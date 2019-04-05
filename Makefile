@@ -6,7 +6,7 @@
 #    By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/14 17:33:26 by mjacques          #+#    #+#              #
-#    Updated: 2019/04/05 00:47:46 by mjacques         ###   ########.fr        #
+#    Updated: 2019/04/05 13:06:13 by mjacques         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ LIBFT 		= libft/libft.a
 INCLUDES	= -I includes\
 			  -I libft/includes
 
-BASE		= main.c error.c print.c
+BASE		= main.c flags.c error.c print.c
 PARSE		= parse.c node.c edges.c
 PATH_MAP	= path.c set_path.c find_paths.c
 EXECUTE		= dispatch.c execute.c

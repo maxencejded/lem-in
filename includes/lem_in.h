@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:16:56 by tkobb             #+#    #+#             */
-/*   Updated: 2019/04/05 01:19:14 by mjacques         ###   ########.fr       */
+/*   Updated: 2019/04/05 14:55:16 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define DICT_SIZE 256
 # define COMMENT '#'
 # define UINT unsigned int
+# define UCHAR unsigned char
 
 typedef enum		e_visited
 {
@@ -60,12 +61,19 @@ typedef struct		s_paths
 	struct s_paths	*next;
 }					t_paths;
 
-t_node				*parse(t_dict **map);
+# define FLAGS "apq"
+# define FLAG_A 1
+# define FLAG_P 2
+# define FLAG_Q 4
+
+void				flags(int ac, char **av, unsigned char *flags);
+
+t_node				*parse(t_dict **map, UCHAR options);
 t_node				*node_add(t_dict **map, t_node **start, char *s, t_flag f);
 void				node_link(t_dict **map, char *str, int middle);
 void				node_edge(t_dict **map, t_node *elem_1, t_node *elem_2);
 
-t_path				**shortest_paths(t_node *source, UINT n_ants, int *size);
+int					shortest_paths(t_node *source, UINT n_ants, UCHAR options);
 t_path				*init_path(t_node *sink, t_node **next);
 t_path				*set_path(t_node *sink);
 t_path				*create_path(size_t size);
