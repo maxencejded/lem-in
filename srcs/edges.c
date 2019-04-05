@@ -35,7 +35,7 @@ static void		edge_insert(t_node *element, t_edge *link)
 	}
 }
 
-void			node_edge(t_hash **map, t_node *elem_1, t_node *elem_2)
+void			node_edge(t_dict **map, t_node *elem_1, t_node *elem_2)
 {
 	t_edge	*edge_1;
 	t_edge	*edge_2;

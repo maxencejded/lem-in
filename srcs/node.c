@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 00:06:12 by mjacques          #+#    #+#             */
-/*   Updated: 2019/04/04 19:47:06 by mjacques         ###   ########.fr       */
+/*   Updated: 2019/04/05 00:41:22 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static t_node	*node_create(char *name, t_flag flag)
 	return (new);
 }
 
-t_node			*node_add(t_hash **map, t_node **start, char *s, t_flag f)
+t_node			*node_add(t_dict **map, t_node **start, char *s, t_flag f)
 {
 	char	**split;
 	t_node	*node;
@@ -54,13 +54,13 @@ t_node			*node_add(t_hash **map, t_node **start, char *s, t_flag f)
 	ft_ptrdel(split);
 	if (node == NULL)
 		exit_lem_in("Not enough Memory", map);
-	elem_insert(map, HASH_MAP_SIZE, node->name, node);
+	dict_insert(map, DICT_SIZE, node->name, node);
 	if (f == SOURCE)
 		*start = node;
 	return (node);
 }
 
-void			node_link(t_hash **map, char *str, int middle)
+void			node_link(t_dict **map, char *str, int middle)
 {
 	char	*node_1;
 	char	*node_2;
@@ -69,8 +69,8 @@ void			node_link(t_hash **map, char *str, int middle)
 
 	node_1 = ft_strsub(str, 0, middle);
 	node_2 = ft_strsub(str, middle + 1, ft_strlen(str) - middle - 1);
-	elem_1 = (t_node *)elem_find(map, HASH_MAP_SIZE, node_1);
-	elem_2 = (t_node *)elem_find(map, HASH_MAP_SIZE, node_2);
+	elem_1 = (t_node *)dict_search(map, DICT_SIZE, node_1);
+	elem_2 = (t_node *)dict_search(map, DICT_SIZE, node_2);
 	ft_strdel(&node_1);
 	ft_strdel(&node_2);
 	if (!elem_1 || !elem_2)

@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:16:56 by tkobb             #+#    #+#             */
-/*   Updated: 2019/04/04 20:09:12 by mjacques         ###   ########.fr       */
+/*   Updated: 2019/04/05 00:56:44 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define LEM_IN_H
 
 # include "libft.h"
-# include "hash_map.h"
+# include "dict.h"
 
-# define HASH_MAP_SIZE 256
+# define DICT_SIZE 256
 # define COMMENT '#'
 # define UINT unsigned int
 
@@ -60,27 +60,26 @@ typedef struct		s_paths
 	struct s_paths	*next;
 }					t_paths;
 
-t_node				*parse(t_hash **map);
-t_node				*node_add(t_hash **map, t_node **start, char *s, t_flag f);
-void				node_link(t_hash **map, char *str, int middle);
-void				node_edge(t_hash **map, t_node *elem_1, t_node *elem_2);
+t_node				*parse(t_dict **map);
+t_node				*node_add(t_dict **map, t_node **start, char *s, t_flag f);
+void				node_link(t_dict **map, char *str, int middle);
+void				node_edge(t_dict **map, t_node *elem_1, t_node *elem_2);
 
-t_path				**shortest_paths(t_node *graph, UINT n_ants, int *size);
+t_path				**shortest_paths(t_node *source, UINT n_ants, int *size);
 t_path				*init_path(t_node *sink, t_node **next);
 t_path				*set_path(t_node *sink);
 t_path				*create_path(size_t size);
 t_paths				*create_paths(t_path *path);
 void				set_edge_visited(t_node *a, t_node *b);
-t_path				**dispatch(t_paths *paths, int n_ants, int *size);
 
+t_path				**dispatch(t_paths *paths, int n_ants, int *size);
 void				execute(t_path **path, int n_ants, int size);
 
-void				node_print(t_node *node);
-void				h_map_print(t_hash **map, size_t size);
+void				dict_print(t_dict **dict, size_t size);
 void				print_paths(t_path **path, int size);
 
-int					exit_lem_in(char *str, t_hash **map);
-void				free_map(t_hash **map, size_t size);
+int					exit_lem_in(char *str, t_dict **map);
+void				free_map(t_dict **map, size_t size);
 void				node_free(t_node *node);
 void				free_path(t_path **path, int size);
 void				free_paths(t_paths *paths);

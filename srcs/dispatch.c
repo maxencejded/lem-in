@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 17:47:45 by mjacques          #+#    #+#             */
-/*   Updated: 2019/04/04 18:59:46 by mjacques         ###   ########.fr       */
+/*   Updated: 2019/04/05 00:58:50 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,28 +28,26 @@ static int		paths_size(t_paths *paths)
 static t_path	**paths_number(t_paths *paths, int *size)
 {
 	int			i;
-	t_paths		*cur;
+	t_paths		*tmp;
 	t_path		**used_path;
 
 	*size = paths_size(paths);
-	if (!(used_path = (t_path **)malloc(sizeof(t_path *) * *size)))
+	if ((used_path = (t_path **)malloc(sizeof(t_path *) * (*size))))
 	{
-		free_paths(paths);
-		return (NULL);
-	}
-	i = 0;
-	cur = paths;
-	while (i < *size)
-	{
-		used_path[i] = cur->path;
-		cur = cur->next;
-		i += 1;
+		i = 0;
+		tmp = paths;
+		while (i < *size)
+		{
+			used_path[i] = tmp->path;
+			tmp = tmp->next;
+			i += 1;
+		}
 	}
 	free_paths(paths);
-	return (used_path);
+	return ((used_path) ? used_path : NULL);
 }
 
-static void		fill_paths(t_path **used_path, int max, int ants)
+static void		add_ants(t_path **used_path, int max, int ants)
 {
 	int		i;
 
@@ -61,7 +59,7 @@ static void		fill_paths(t_path **used_path, int max, int ants)
 	}
 }
 
-static void		fill_path_one(t_path **used_path, int max, int *n_ants)
+static void		add_ant(t_path **used_path, int max, int *n_ants)
 {
 	int		i;
 
@@ -89,18 +87,18 @@ t_path			**dispatch(t_paths *paths, int n_ants, int *size)
 	{
 		if (i + 1 < *size)
 		{
-			ants = paths_list[i + 1]->len - paths_list[i]->len;
-			if (n_ants - (ants * (i + 1)) > 0)
+			i += 1;
+			ants = paths_list[i]->len - paths_list[i - 1]->len;
+			if (n_ants - (ants * i) > 0)
 			{
-				n_ants -= (ants * (i + 1));
-				fill_paths(paths_list, i + 1, ants);
+				n_ants -= (ants * i);
+				add_ants(paths_list, i, ants);
 			}
 			else
-				fill_path_one(paths_list, i + 1, &n_ants);
+				add_ant(paths_list, i, &n_ants);
 		}
 		else
-			fill_path_one(paths_list, *size, &n_ants);
-		i += 1;
+			add_ant(paths_list, *size, &n_ants);
 	}
 	return (paths_list);
 }

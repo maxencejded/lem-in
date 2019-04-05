@@ -1,42 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hash_map.c                                         :+:      :+:    :+:   */
+/*   hash.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/13 00:06:45 by mjacques          #+#    #+#             */
-/*   Updated: 2018/12/13 00:56:42 by mjacques         ###   ########.fr       */
+/*   Created: 2019/04/05 00:44:00 by mjacques          #+#    #+#             */
+/*   Updated: 2019/04/05 00:44:33 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "hash_map.h"
+#include "dict.h"
 
-t_hash			**h_map_create(size_t size)
+/*
+** FNV-1a for 32 bits
+** FNV prime = 16777619
+** FNV offset basis = 2166136261
+*/
+
+size_t			hash(char *str)
 {
-	t_hash		**map;
+	unsigned int	i;
+	unsigned int	hash;
 
-	if (!(map = ft_memalloc(sizeof(t_hash *) * size)))
-		return (NULL);
-	return (map);
-}
-
-void			h_map_free(t_hash **map, size_t size)
-{
-	size_t		i;
-	t_hash		*tmp;
-
-	if (!map)
-		return ;
-	i = -1;
-	while (++i < size)
+	hash = FNV_OFFSET_32;
+	i = 0;
+	while (str[i])
 	{
-		while (map[i])
-		{
-			tmp = map[i];
-			map[i] = map[i]->next;
-			free(tmp);
-		}
+		hash ^= str[i];
+		hash *= FNV_PRIME_32;
+		i += 1;
 	}
-	free(map);
+	return ((size_t)hash);
 }

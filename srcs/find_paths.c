@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 21:41:47 by tkobb             #+#    #+#             */
-/*   Updated: 2019/04/04 20:11:38 by mjacques         ###   ########.fr       */
+/*   Updated: 2019/04/05 00:27:44 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,13 @@ static void			process_edges(t_node *node, t_queue **queue)
 	}
 }
 
-int					find_shortest_path(t_node *graph, t_paths **tail)
+static int			find_shortest_path(t_node *source, t_paths **tail)
 {
 	t_queue	*queue;
 	t_node	*node;
 
 	queue = NULL;
-	queue_add(&queue, graph);
+	queue_add(&queue, source);
 	while ((node = queue_pop(queue)))
 	{
 		if (node->flag == SINK)
@@ -87,21 +87,21 @@ void				reset_heights(t_node *graph)
 	}
 }
 
-t_path				**shortest_paths(t_node *graph, UINT n_ants, int *size)
+t_path				**shortest_paths(t_node *source, UINT n_ants, int *size)
 {
 	t_paths			*head;
 	t_paths			*tail;
 	t_path			**path_use;
 
 	tail = NULL;
-	head = tail;
-	while ((find_shortest_path(graph, &tail)))
+	head = NULL;
+	while ((find_shortest_path(source, &tail)))
 	{
 		if (head == NULL)
 			head = tail;
 		if (tail && tail->path->len >= n_ants)
 			break ;
-		reset_heights(graph);
+		reset_heights(source);
 	}
 	path_use = dispatch(head, n_ants, size);
 	return (path_use);

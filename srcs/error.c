@@ -6,23 +6,23 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 00:08:00 by mjacques          #+#    #+#             */
-/*   Updated: 2019/04/04 18:33:52 by mjacques         ###   ########.fr       */
+/*   Updated: 2019/04/05 00:33:41 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int			exit_lem_in(char *str, t_hash **map)
+int			exit_lem_in(char *str, t_dict **map)
 {
-	free_map(map, HASH_MAP_SIZE);
+	dict_free(map, DICT_SIZE);
 	ft_putendl(str);
 	exit(-1);
 }
 
-void		free_map(t_hash **map, size_t size)
+void		free_map(t_dict **map, size_t size)
 {
 	size_t	i;
-	t_hash	*tmp;
+	t_dict	*tmp;
 
 	if (!map)
 		return ;

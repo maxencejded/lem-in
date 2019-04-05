@@ -34,7 +34,7 @@ static t_flag	flag_init(char *str, char *info)
 	return (flag);
 }
 
-static char		*create_anthill(t_hash **map, t_node **start, char *info)
+static char		*create_anthill(t_dict **map, t_node **start, char *info)
 {
 	int		ret;
 	char	*line;
@@ -72,7 +72,7 @@ static int		find_middle(char *line)
 	return (0);
 }
 
-static void		create_link(t_hash **map, char *line)
+static void		create_link(t_dict **map, char *line)
 {
 	int		middle;
 
@@ -92,7 +92,7 @@ static void		create_link(t_hash **map, char *line)
 	ft_strdel(&line);
 }
 
-t_node			*parse(t_hash **map)
+t_node			*parse(t_dict **map)
 {
 	char	info;
 	char	*line;
