@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   set_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 16:01:05 by tkobb             #+#    #+#             */
-/*   Updated: 2018/12/17 05:28:48 by theo             ###   ########.fr       */
+/*   Updated: 2019/04/04 19:04:26 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include <limits.h>
 
-static t_node	*neighbor_with_min_height(t_node *node)
+static t_node	*min_height(t_node *node)
 {
 	unsigned int	min_h;
 	t_node			*neighbor_with_min_h;
 	t_edge			*edge;
 
- 	neighbor_with_min_h = NULL;
+	neighbor_with_min_h = NULL;
 	min_h = UINT_MAX;
 	edge = node->edges;
 	while (edge)
@@ -48,7 +48,7 @@ UINT			validate_path(t_node *sink)
 	{
 		if (node->flag == SOURCE)
 			return (len);
-		if ((next = neighbor_with_min_height(node)) == NULL || next->height >= node->height)
+		if ((next = min_height(node)) == NULL || next->height >= node->height)
 			return (0);
 		len += 1;
 		node = next;
@@ -75,7 +75,7 @@ t_path			*set_path(t_node *sink)
 			break ;
 		len--;
 		node->visited = TRUE;
-		next = neighbor_with_min_height(node);
+		next = min_height(node);
 		set_edge_visited(node, next);
 		set_edge_visited(next, node);
 		node = next;

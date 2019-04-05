@@ -6,13 +6,13 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:25:37 by mjacques          #+#    #+#             */
-/*   Updated: 2018/12/14 17:51:32 by mjacques         ###   ########.fr       */
+/*   Updated: 2019/04/04 20:09:42 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void		node_print(t_node *node)
+void			node_print(t_node *node)
 {
 	t_edge	*tmp;
 
@@ -34,7 +34,7 @@ void		node_print(t_node *node)
 	}
 }
 
-void		h_map_print(t_hash **map, size_t size)
+void			h_map_print(t_hash **map, size_t size)
 {
 	size_t	i;
 	t_hash	*tmp;
@@ -55,27 +55,27 @@ void		h_map_print(t_hash **map, size_t size)
 	ft_putchar('\n');
 }
 
-void		print_path(t_path *path)
+static void		print_path(t_path *path)
 {
 	size_t i;
 
 	i = 0;
 	while (i < path->len)
 	{
-		ft_printf("%s -> ", path->nodes[i]->name);
+		ft_printf("%s ", path->nodes[i]->name);
 		i++;
 	}
-	ft_printf(" [%d]\n", path->len);
+	ft_printf("[%d]\n", path->len);
 }
 
-void		print_paths(t_paths *paths)
+void			print_paths(t_path **path, int size)
 {
-	t_paths *cur;
+	int		i;
 
-	cur = paths;
-	while (cur)
+	i = 0;
+	while (i < size)
 	{
-		print_path(cur->path);
-		cur = cur->next;
+		print_path(path[i]);
+		i += 1;
 	}
 }

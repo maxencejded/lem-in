@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:22:15 by tkobb             #+#    #+#             */
-/*   Updated: 2019/04/03 17:48:56 by mjacques         ###   ########.fr       */
+/*   Updated: 2019/04/04 20:31:08 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ static int	ants_nbr(void)
 	{
 		nbr = ft_strtoi(line, &end);
 		if (*end != '\0')
+		{
+			ft_strdel(&line);
 			return (0);
+		}
 		ft_strdel(&line);
 	}
 	return (nbr);
@@ -31,11 +34,13 @@ static int	ants_nbr(void)
 
 int			main(int argc, char **argv)
 {
+	int				size;
 	int				n_ants;
 	t_hash			**map;
 	t_node			*graph;
-	t_paths			*paths;
+	t_path			**path_use;
 
+	size = 0;
 	map = NULL;
 	if (argc != 1 && argv[0])
 		ft_error("Usage: ./lem-in");
@@ -45,13 +50,11 @@ int			main(int argc, char **argv)
 		exit_lem_in("ERROR", map);
 	if ((graph = parse(map)) == NULL)
 		exit_lem_in("ERROR", map);
-	if ((paths = find_shortest_paths(graph, n_ants)) == NULL)
+	if ((path_use = shortest_paths(graph, n_ants, &size)) == NULL)
 		exit_lem_in("ERROR", map);
 	ft_printf("Ants: %d\n", n_ants);
-	h_map_print(map, HASH_MAP_SIZE);
-	print_paths(paths);
-	execute(paths, n_ants);
-	free_paths(paths);
+	execute(path_use, n_ants, size);
+	free_path(path_use, size);
 	free_map(map, HASH_MAP_SIZE);
 	return (0);
 }

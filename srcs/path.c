@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 21:41:44 by tkobb             #+#    #+#             */
-/*   Updated: 2018/12/14 17:52:14 by mjacques         ###   ########.fr       */
+/*   Updated: 2019/04/04 18:22:23 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_path			*create_path(size_t size)
 	if ((path->nodes = (t_node**)malloc(sizeof(t_node*) * size)) == NULL)
 		ft_error("Not enough Memory");
 	path->len = (UINT)size;
+	path->ants_nbr = 0;
 	return (path);
 }
 

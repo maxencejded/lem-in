@@ -6,7 +6,7 @@
 #    By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/14 17:33:26 by mjacques          #+#    #+#              #
-#    Updated: 2018/12/14 17:50:34 by mjacques         ###   ########.fr        #
+#    Updated: 2019/04/04 17:58:16 by mjacques         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ INCLUDES	= -I includes\
 BASE		= main.c error.c print.c
 PARSE		= parse.c node.c edges.c
 PATH_MAP	= path.c set_path.c find_paths.c
-EXECUTE		= execute.c
+EXECUTE		= dispatch.c execute.c
 HASH_MAP	= hash_map.c hash_map_elem.c
 QUEUE		= queue_new.c queue_free.c queue_add.c queue_pop.c
 

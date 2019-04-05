@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_paths.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 21:41:47 by tkobb             #+#    #+#             */
-/*   Updated: 2018/12/17 05:06:12 by theo             ###   ########.fr       */
+/*   Updated: 2019/04/04 20:11:38 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,11 @@ void				reset_heights(t_node *graph)
 	}
 }
 
-t_paths				*find_shortest_paths(t_node *graph, unsigned int n_ants)
+t_path				**shortest_paths(t_node *graph, UINT n_ants, int *size)
 {
 	t_paths			*head;
 	t_paths			*tail;
+	t_path			**path_use;
 
 	tail = NULL;
 	head = tail;
@@ -102,5 +103,6 @@ t_paths				*find_shortest_paths(t_node *graph, unsigned int n_ants)
 			break ;
 		reset_heights(graph);
 	}
-	return (head);
+	path_use = dispatch(head, n_ants, size);
+	return (path_use);
 }

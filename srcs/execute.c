@@ -3,64 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/14 16:00:42 by tkobb             #+#    #+#             */
-/*   Updated: 2018/12/17 05:39:39 by theo             ###   ########.fr       */
+/*   Created: 2019/04/04 19:22:29 by mjacques          #+#    #+#             */
+/*   Updated: 2019/04/04 20:38:06 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static void	execute_path(t_path *path, UINT *remaining,
-	UINT *arrived, UINT *ant_nbr, char is_shortest_path)
+static void	execute_path(t_path *path, int *arrived, UINT *number)
 {
-	UINT	i;
+	int		i;
 
 	i = path->len - 2;
-	while (i != 0)
+	while (i >= 0)
 	{
-		if (path->nodes[i]->used != 0)
+		if (path->nodes[i]->used >= 0)
 		{
 			path->nodes[i + 1]->used = path->nodes[i]->used;
 			ft_printf("L%d-%s ", path->nodes[i]->used,
 				path->nodes[i + 1]->name);
-			path->nodes[i]->used = 0;
+			path->nodes[i]->used = -1;
 			if (path->nodes[i + 1]->flag == SINK)
 				*arrived += 1;
 		}
 		i -= 1;
 	}
-	if (*remaining != 0 && (is_shortest_path || *remaining >= path->len))
+	if (path->ants_nbr > 0)
 	{
-		ft_printf("L%d-%s ", *ant_nbr, path->nodes[1]->name);
-		path->nodes[1]->used = *ant_nbr;
+		ft_printf("L%d-%s ", *number, path->nodes[1]->name);
+		path->nodes[1]->used = *number;
 		if (path->nodes[1]->flag == SINK)
 			*arrived += 1;
-		*ant_nbr += 1;
-		*remaining -= 1;
+		*number += 1;
+		path->ants_nbr -= 1;
 	}
 }
 
-int			execute(t_paths *paths, UINT n_ants)
+void		execute(t_path **path, int n_ants, int size)
 {
-	UINT		remaining;
-	UINT		arrived;
-	UINT		ant_nbr;
-	t_paths		*path;
+	int		i;
+	int		arrived;
+	UINT	number;
 
-	remaining = n_ants;
+	number = 0;
 	arrived = 0;
-	ant_nbr = 1;
 	while (arrived != n_ants)
 	{
-		path = paths;
-		while (path)
+		i = size - 1;
+		while (i >= 0)
 		{
-			execute_path(path->path, &remaining, &arrived, &ant_nbr, path->path->len == paths->path->len);
-			path = path->next;
+			execute_path(path[i], &arrived, &number);
+			i -= 1;
 		}
 		ft_putchar('\n');
 	}
-	return (0);
 }

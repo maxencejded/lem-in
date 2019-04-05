@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 00:06:12 by mjacques          #+#    #+#             */
-/*   Updated: 2019/04/03 17:52:51 by mjacques         ###   ########.fr       */
+/*   Updated: 2019/04/04 19:47:06 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static t_node	*node_create(char *name, t_flag flag)
 	if (!(new = (t_node *)malloc(sizeof(t_node))))
 		return (NULL);
 	new->name = ft_strdup(name);
-	new->used = 0;
+	new->used = -1;
 	new->visited = FALSE;
 	new->height = 0;
 	new->flag = flag;

@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 00:08:00 by mjacques          #+#    #+#             */
-/*   Updated: 2019/04/03 17:50:12 by mjacques         ###   ########.fr       */
+/*   Updated: 2019/04/04 18:33:52 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,23 +58,28 @@ void		node_free(t_node *node)
 	free(node);
 }
 
-void		free_path(t_path *path)
+void		free_path(t_path **path, int size)
 {
-	free(path->nodes);
+	int		i;
+
+	i = 0;
+	while (i < size)
+	{
+		free(path[i]->nodes);
+		free(path[i]);
+		i += 1;
+	}
 	free(path);
 }
 
 void		free_paths(t_paths *paths)
 {
-	t_paths	*cur;
-	t_paths	*next;
+	t_paths	*tmp;
 
-	cur = paths;
-	while (cur)
+	while (paths)
 	{
-		free_path(cur->path);
-		next = cur->next;
-		free(cur);
-		cur = next;
+		tmp = paths;
+		paths = paths->next;
+		free(tmp);
 	}
 }
