@@ -6,12 +6,12 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 21:41:47 by tkobb             #+#    #+#             */
-/*   Updated: 2019/04/05 14:54:31 by mjacques         ###   ########.fr       */
+/*   Updated: 2019/04/05 17:27:36 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <lem_in.h>
-#include <queue.h>
+#include "lem_in.h"
+#include "queue.h"
 
 static int			add_path(t_paths **tail, t_node *end)
 {
@@ -101,8 +101,6 @@ int					shortest_paths(t_node *source, UINT n_ants, UCHAR options)
 	{
 		if (head == NULL)
 			head = tail;
-		if (tail && tail->path->len >= n_ants)
-			break ;
 		reset_heights(source);
 	}
 	if ((paths = dispatch(head, n_ants, &size)) == NULL)

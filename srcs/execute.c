@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 19:22:29 by mjacques          #+#    #+#             */
-/*   Updated: 2019/04/05 14:54:56 by mjacques         ###   ########.fr       */
+/*   Updated: 2019/04/05 17:27:10 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ static void		execute_path(t_path *path, int *arrived, int *num)
 void			execute(t_path **path, int n_ants, int size)
 {
 	int		i;
-	int		arrived;
 	int		num;
+	int		arrived;
 
 	num = 0;
 	arrived = 0;
