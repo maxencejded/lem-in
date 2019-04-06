@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 19:22:29 by mjacques          #+#    #+#             */
-/*   Updated: 2019/04/05 17:27:10 by mjacques         ###   ########.fr       */
+/*   Updated: 2019/04/05 18:32:06 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void		execute_path(t_path *path, int *arrived, int *num)
 	}
 	if (path->ants_nbr > 0)
 	{
-		move_ants(path, arrived, 1, num);
+		move_ants(path, arrived, 0, num);
 		*num += 1;
 		path->ants_nbr -= 1;
 	}
