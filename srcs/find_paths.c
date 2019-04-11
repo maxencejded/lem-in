@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 21:41:47 by tkobb             #+#    #+#             */
-/*   Updated: 2019/04/05 17:27:36 by mjacques         ###   ########.fr       */
+/*   Updated: 2019/04/10 15:56:11 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ int					shortest_paths(t_node *source, UINT n_ants, UCHAR options)
 			head = tail;
 		reset_heights(source);
 	}
+	if (head == NULL)
+		return (0);
 	if ((paths = dispatch(head, n_ants, &size)) == NULL)
 		return (0);
 	(options & FLAG_P) ? print_paths(paths, size) : 0;
