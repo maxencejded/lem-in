@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:22:15 by tkobb             #+#    #+#             */
-/*   Updated: 2019/04/05 14:54:44 by mjacques         ###   ########.fr       */
+/*   Updated: 2019/08/26 17:50:49 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static int		ants_nbr(UCHAR options)
 	char		*end;
 
 	nbr = 0;
-	if (get_next_line(0, &line) && *line)
+	line = NULL;
+	if (get_next_line(0, &line) > 0 && line)
 	{
 		nbr = ft_strtoi(line, &end);
 		if (*end != '\0')
@@ -28,8 +29,8 @@ static int		ants_nbr(UCHAR options)
 			return (0);
 		}
 		(options & FLAG_Q) ? 0 : ft_putendl(line);
-		ft_strdel(&line);
 	}
+	ft_strdel(&line);
 	return (nbr);
 }
 
